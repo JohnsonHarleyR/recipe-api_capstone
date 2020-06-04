@@ -13,18 +13,19 @@
 <link href="/style.css" rel="stylesheet" />
 
 <meta charset="ISO-8859-1">
-<title>Home Page</title>
+<title>Search Result</title>
 </head>
 <body>
 
 <!-- Header -->
 <section class="header">
-<h1>Search for a Recipe</h1>
-
+<%@ include file="partials/header.jsp" %>
 </section>
 
 <!-- MainBody -->
 <main class="container">
+<h1>Result</h1>
+
 
 </main>
 

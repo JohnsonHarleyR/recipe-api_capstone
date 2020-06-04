@@ -19,13 +19,57 @@
 
 <!-- Header -->
 <section class="header">
-
+<%@ include file="partials/header.jsp" %>
 </section>
 
 <!-- MainBody -->
 <main class="container">
 
-<h1>User Info</h1>
+
+
+<table>
+<tr>
+<th>
+<article>
+	<section class="card-header">
+		<h1>User Information</h1>		
+	</section>
+</article>
+</th>
+</tr>
+<tr>
+<td>
+<section class="card-body" id="info">
+<p id="editmsg">
+<i>${message}</i>
+</p>
+
+<p>
+<b>Username: </b> ${user.username}
+</p>
+<p>
+<b>Email: </b> ${user.email}
+</p>
+<p>
+<b>Password: </b> ${password}
+</p>
+<p>
+<b>First name: </b> ${user.name}
+</p>
+
+<p>
+<a href="/user/edit" id="btnedit"><button type="button" id="su"
+class="btn btn-light btn-lg">Edit Info</button></a>
+</p>
+
+</section>
+
+</td>
+</tr>
+</table>
+
+
+
 
 </main>
 

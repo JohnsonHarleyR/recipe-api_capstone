@@ -13,19 +13,20 @@
 <link href="/style.css" rel="stylesheet" />
 
 <meta charset="ISO-8859-1">
-<title>Favorite Recipes</title>
+<title>Recipe</title>
 </head>
 <body>
 
 <!-- Header -->
 <section class="header">
-
-<h1>Favorite Recipes</h1>
-
+<%@ include file="partials/header.jsp" %>
 </section>
 
 <!-- MainBody -->
 <main class="container">
+<h1>
+<!-- Recipe name goes here (ex.) ${recipe.name} -->
+</h1>
 
 </main>
 

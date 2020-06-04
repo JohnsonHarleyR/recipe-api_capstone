@@ -13,18 +13,22 @@
 <link href="/style.css" rel="stylesheet" />
 
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>User Settings</title>
 </head>
 <body>
 
 <!-- Header -->
 <section class="header">
-<h1>User Settings</h1>
-
+<%@ include file="partials/header.jsp" %>
 </section>
 
 <!-- MainBody -->
 <main class="container">
+
+
+<h1>User Settings</h1>
+
+
 
 </main>
 
