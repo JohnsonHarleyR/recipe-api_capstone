@@ -28,6 +28,7 @@
 <!-- Navigation Bar -->
 <nav class="navbar navbar-custom">
 	<ul class="nav">
+	
 		<li class="nav-item">
 			<a class="nav-link" href="/">Find Recipe</a>
 		</li>
@@ -56,6 +57,12 @@
 				<a class="nav-link" href="/logout">Sign Out</a>
 				</c:when>
 			</c:choose>
+		</li>
+		<li class="nav-item">
+			<form action="/search">
+			<label>Search: </label>
+			<input type="search" name="keyword"/>
+			</form>
 		</li>
 	</ul>
 </nav>
