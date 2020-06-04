@@ -24,8 +24,27 @@
 
 <!-- MainBody -->
 <main class="container">
-<h1>Result</h1>
 
+
+<h1>Search Results</h1>
+
+
+
+<!-- **Search bar goes here?** -->
+
+<ol>
+<c:forEach var="hit" items="${searchResult.hits}">
+
+
+<li><a href="">${hit.recipe.label}</a></li>
+
+
+
+
+
+
+</c:forEach>
+</ol>
 
 </main>
 
