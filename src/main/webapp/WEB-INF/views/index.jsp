@@ -26,6 +26,14 @@
 <main class="container">
 <h1>Search for a Recipe</h1>
 
+<!-- Search bar -->
+<form action="/search">
+<input type="search" name="keyword"/>
+
+
+<button class="" type="submit">Search</button>
+</form>
+
 
 </main>
 
