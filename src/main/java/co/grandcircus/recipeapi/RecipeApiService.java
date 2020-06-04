@@ -11,27 +11,89 @@ import co.grandcircus.recipeapi.model.RecipeApiResponse;
 
 @Service
 public class RecipeApiService {
-	
+
 	private RestTemplate rest = new RestTemplate();
-	
+
 	@Value("${app.id}")
-	private String appId; 
-	
+	private String appId;
+
 	@Value("${app.key}")
 	private String appKey;
-	
-	public RecipeApiResponse recipeSearch(String searchTerms) {
-		
-		String url = "https://api.edamam.com/search?q=" + searchTerms + "&app_id=" + appId + "&app_key=" + appKey;
-		
-		RecipeApiResponse searchResult = rest.getForObject(url, RecipeApiResponse.class);
-		
-		return searchResult;
+
+	public RecipeApiResponse recipeSearch(String searchTerms, int fromNum, int toNum) {
+
+		String url = "https://api.edamam.com/search?q=" + searchTerms + "&app_id=" + appId + "&app_key=" + appKey
+				+ "&from=" + fromNum + "&to=" + toNum;
+
+		return rest.getForObject(url, RecipeApiResponse.class);
+
+	}
+
+	public Recipe getOneRecipe(String recipeUri) {
+
+		String url = "https://api.edamam.com/search?app_id=" + appId + "&app_key=" + appKey + "&r=" + recipeUri;
+
+		Recipe recipe = rest.getForObject(url, Recipe.class);
+
+		return recipe;
+
+	}
+
+	public RecipeApiResponse recipeSearch(String searchTerms, String fromNum, String toNum, String diet, String health,
+			String calories, // must be sent as a string describing a range like "300-800"
+			String excluded) {
+
+		if (searchTerms != null && !searchTerms.equals("")) {
+			searchTerms = "q=" + searchTerms;
+		} else {
+			searchTerms = "";
+		}
+
+		if (fromNum != null && !fromNum.equals("")) {
+			fromNum = "from=" + fromNum;
+		} else {
+			fromNum = "";
+		}
+
+		if (toNum != null && !toNum.equals("")) {
+			toNum = "to=" + toNum;
+		} else {
+			toNum = "";
+		}
+
+		if (diet != null && !diet.equals("")) {
+			diet = "diet=" + diet;
+		} else {
+			diet = "";
+		}
+
+		if (health != null && !health.equals("")) {
+			health = "health=" + health;
+		} else {
+			health = "";
+		}
+
+		if (calories != null && !calories.equals("")) {
+			calories = "calories=" + calories;
+		} else {
+			calories = "";
+		}
+
+		if (excluded != null && !excluded.equals("")) {
+			excluded = "excluded=" + excluded;
+		} else {
+			excluded = "";
+		}
+
+		String url = "https://api.edamam.com/search?app_id=" + appId + "&app_key=" + appKey + searchTerms + fromNum
+				+ toNum + diet + health + calories + excluded;
+
+		return rest.getForObject(url, RecipeApiResponse.class);
 		
 	}
-	
+
 	// Method for advanced searching
-	
+
 	// Method to filter search results
 
 }

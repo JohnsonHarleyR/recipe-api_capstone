@@ -51,7 +51,7 @@ public class RecipeController {
 	public String searchResult(@RequestParam(name="keyword") String keyword,
 			Model model) {
 		
-		RecipeApiResponse response = service.recipeSearch(keyword);
+		RecipeApiResponse response = service.recipeSearch(keyword, 1 , 10);
 		
 		model.addAttribute("searchResult", response);
 		
