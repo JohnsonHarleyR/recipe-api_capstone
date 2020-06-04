@@ -8,7 +8,11 @@ public class Digest {
 	private String tag;
 	private String schemaOrgTag;
 	private Double total;
+<<<<<<< HEAD
 	private Boolean hasRDI;
+=======
+	private boolean hasRDI;
+>>>>>>> 8f7adfa26d4f30da9592f0bd42fbdbfb9d275be4
 	private Double daily;
 	private String unit;
 	private List<Sub> sub;
