@@ -29,10 +29,10 @@
 <nav class="navbar navbar-custom">
 	<ul class="nav">
 		<li class="nav-item">
-			<a class="nav-link" href="/review-tasks">Review Tasks</a>
+			<a class="nav-link" href="/">Find Recipe</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="/modify-tasks">Modify Tasks</a>
+			<a class="nav-link" href="/">Favorite Recipes</a>
 		</li>
 	</ul>
 
@@ -40,10 +40,10 @@
 		<li class="nav-item" >
 			<c:choose>
 				<c:when test="${loggedin == false}">
-					<a class="nav-link" href="/login">Sign In</a>
+					<a class="nav-link" href="/l">Sign In</a>
 				</c:when>
 				<c:when test="${loggedin == true}">
-				<a id="hello" class="nav-link" href="/user-info"><c:out value="Hello, ${user.name}!"/></a>
+				<a id="hello" class="nav-link" href="/"><c:out value="Hello, ${user.name}!"/></a>
 				</c:when>
 			</c:choose>
 		</li>
