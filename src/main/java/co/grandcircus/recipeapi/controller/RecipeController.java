@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import co.grandcircus.recipeapi.RecipeApiService;
+import co.grandcircus.recipeapi.model.RecipeApiResponse;
 
 @Controller
 public class RecipeController {
@@ -14,6 +15,10 @@ public class RecipeController {
 	
 	@RequestMapping("/")
 	public String homePage() {
+		
+		RecipeApiResponse response = service.recipeSearch("chicken");
+		
+		System.out.println(response);
 		
 		return "index";
 	}

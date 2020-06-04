@@ -14,13 +14,15 @@ public class RecipeApiService {
 	
 	private RestTemplate rest = new RestTemplate();
 	
-	@Value("${ app.id }")
-	String appId; 
+	@Value("${app.id}")
+	private String appId; 
 	
-	@Value("${ app.key }")
-	String appKey;
+	@Value("${app.key}")
+	private String appKey;
 	
 	public RecipeApiResponse recipeSearch(String searchTerms) {
+		
+		searchTerms = "chicken";
 		
 		String url = "https://api.edamam.com/search?q=" + searchTerms + "&app_id=" + appId + "&app_key=" + appKey;
 		
