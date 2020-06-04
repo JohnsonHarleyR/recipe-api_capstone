@@ -6,8 +6,8 @@ public class Sub {
 	private String tag;
 	private String schemaOrgTag;
 	private Double total;
-	private boolean hasRDI;
-	private double daily;
+	private Boolean hasRDI;
+	private Double daily;
 	private String unit;
 	
 	//@return GET label
@@ -56,7 +56,7 @@ public class Sub {
 	}
 	
 	//@param SET hasRDI
-	public void setHasRDI(boolean hasRDI) {
+	public void setHasRDI(Boolean hasRDI) {
 		this.hasRDI = hasRDI;
 	}
 	
@@ -66,7 +66,7 @@ public class Sub {
 	}
 	
 	//@param SET daily
-	public void setDaily(double daily) {
+	public void setDaily(Double daily) {
 		this.daily = daily;
 	}
 	

@@ -1,15 +1,17 @@
 package co.grandcircus.recipeapi.model;
 
+import java.util.List;
+
 public class Digest {
 	
 	private String label;
 	private String tag;
 	private String schemaOrgTag;
 	private Double total;
-	private boolean hasRDI;
-	private double daily;
+	private Boolean hasRDI;
+	private Double daily;
 	private String unit;
-	private Sub sub;
+	private List<Sub> sub;
 	
 	//@return GET label
 	public String getLabel() {
@@ -82,12 +84,12 @@ public class Digest {
 	}
 	
 	//@return GET sub
-	public Sub getSub() {
+	public List<Sub> getSub() {
 		return sub;
 	}
 	
 	//@param SET sub
-	public void setSub(Sub sub) {
+	public void setSub(List<Sub> sub) {
 		this.sub = sub;
 	}
 
