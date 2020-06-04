@@ -1,4 +1,4 @@
-package co.grandcircus.recipeapi.model;
+ package co.grandcircus.recipeapi.model;
 
 
 public class Ingredients {

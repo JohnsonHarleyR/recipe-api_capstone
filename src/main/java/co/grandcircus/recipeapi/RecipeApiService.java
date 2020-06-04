@@ -29,5 +29,9 @@ public class RecipeApiService {
 		return searchResult;
 		
 	}
+	
+	// Method for advanced searching
+	
+	// Method to filter search results
 
 }
