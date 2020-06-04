@@ -7,7 +7,7 @@ public class Sub {
 	private String schemaOrgTag;
 	private Double total;
 	private boolean hasRDI;
-	private double daily;
+	private Double daily;
 	private String unit;
 	
 	//@return GET label
