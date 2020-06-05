@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import co.grandcircus.recipeapi.RecipeApiService;
 import co.grandcircus.recipeapi.dao.UserDao;
+import co.grandcircus.recipeapi.model.OneRecipe;
 import co.grandcircus.recipeapi.model.Recipe;
 import co.grandcircus.recipeapi.model.RecipeApiResponse;
 import co.grandcircus.recipeapi.model.User;
@@ -129,10 +130,11 @@ public class RecipeController {
 	}
 
 	// Individual recipe page
-	public String recipe(Model model, @RequestParam(name = "recipeUri") String recipeUri) {
+	@RequestMapping("/recipe")
+	public String recipe(Model model, @RequestParam(name = "uri") String recipeUri) {
 
-		Recipe recipe = service.getOneRecipe(recipeUri);
-		model.addAttribute("singleRecipe", recipe);
+		OneRecipe recipe = service.getOneRecipe(recipeUri);
+		model.addAttribute("recipe", recipe);
 
 		// For the nav bar
 		model.addAttribute("loggedin", loggedIn);

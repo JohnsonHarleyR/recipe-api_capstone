@@ -24,9 +24,43 @@
 
 <!-- MainBody -->
 <main class="container">
-<h1>
+
 <!-- Recipe name goes here (ex.) ${recipe.name} -->
-</h1>
+${ recipe.uri }
+
+${ recipe.label }
+
+${ recipe.image }
+
+${ recipe.source }
+
+${ recipe.url }
+
+${ recipe.shareAs }
+
+${ recipe.yeild }
+
+<c:forEach items="${ recipe.dietLabels }" var="dietLabel">
+	${ dietLabel }
+</c:forEach>
+
+<c:forEach items="${ recipe.cautions }" var="caution">
+	${ caution }
+</c:forEach>
+
+<c:forEach items="${ recipe.ingredients }" var="ingredient">
+	${ ingredient.text }
+	${ ingredient.weight }
+</c:forEach>
+
+${ recipe.calories }
+
+${ recipe.totalWeight }
+
+${ recipe.totalTime }
+
+
+
 
 </main>
 
