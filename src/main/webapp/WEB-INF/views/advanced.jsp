@@ -30,7 +30,7 @@
 <form  class= "search" id="advanced" action="/advanced-search">
 	
 	<section id="diet">
-		<input type="hidden" id="minNum" value="0">
+		<input type="hidden" name="fromNum" value="0">
 		<label><b>Diet: </b></label><br>
 	
 		<input type="checkbox" name="diet[]" id="diet1" value="balanced"/>
@@ -81,12 +81,18 @@
 		<label>Min:</label>
 		<input type="text" name="min" value="0"/>
 		<label>Max:</label>
-		<input type="text" name="max" value="0"/>
+		<input type="text" name="max" value="5000"/>
+	</section>
+	
+	<section id="excluded">
+	
+		<label>Exclude:</label>
+		<input type="text" name="excluded"/>	
 	</section>
 	
 	<section id="perpage">
 		<label>Results per page:</label>
-		<input type="text" name="results" value="10"/>
+		<input type="text" name="toNum" value="10"/>
 	</section>
 	
 

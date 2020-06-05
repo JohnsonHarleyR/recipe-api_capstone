@@ -49,22 +49,20 @@ public class RecipeController {
 
 		return "index";
 	}
-	
+
 //	 Next group of results
 	@RequestMapping("/next")
-	public String nextResults(Model model,
-			@RequestParam(name = "fromNum") String fromNum,
+	public String nextResults(Model model, @RequestParam(name = "fromNum") String fromNum,
 			@RequestParam(name = "toNum") String toNum) {
-		
+
 		return "redirect:/search";
 	}
-	
+
 //	 Previous group of results
 	@RequestMapping("/previous")
-	public String previousResults(Model model,
-			@RequestParam(name = "fromNum") String fromNum,
+	public String previousResults(Model model, @RequestParam(name = "fromNum") String fromNum,
 			@RequestParam(name = "toNum") String toNum) {
-		
+
 		return "redirect:/search";
 	}
 
@@ -83,14 +81,34 @@ public class RecipeController {
 	@RequestMapping("/advanced-search")
 	public String advancedSearchResult(@RequestParam(name = "keyword") String keyword,
 			@RequestParam(name = "fromNum") String fromNum, @RequestParam(name = "toNum") String toNum,
-			@RequestParam(name = "diet") String diet, @RequestParam(name = "health") String health,
-			@RequestParam(name = "calories") String calories, @RequestParam(name = "excluded") String excluded,
-			Model model) {
+			@RequestParam(name = "diet", required = false) String diet,
+			@RequestParam(name = "health", required = false) String health,
+			@RequestParam(name = "min", required = false) String caloriesMin,
+			@RequestParam(name = "max", required = false) String caloriesMax,
+			@RequestParam(name = "excluded", required = false) String excluded, Model model) {
+		
+		System.out.println(keyword);
+		System.out.println(toNum);
+		System.out.println(fromNum);
+		System.out.println(diet);
+		System.out.println(health);
+		System.out.println(caloriesMin);
+		System.out.println(caloriesMax);
+		System.out.println(excluded);
+		
+
+		String calories = null;
+		
+		if (caloriesMin != null && caloriesMax != null) { 
+			calories = caloriesMin + "-" + caloriesMax;
+		} else {
+			calories = "";
+		}
 
 		RecipeApiResponse response = service.advancedRecipeSearch(keyword, fromNum, toNum, diet, health, calories,
 				excluded);
 
-		model.addAttribute("advancedResult", response);
+		model.addAttribute("searchResult", response);
 
 		return "search";
 	}
