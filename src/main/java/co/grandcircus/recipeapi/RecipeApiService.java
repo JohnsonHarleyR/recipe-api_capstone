@@ -20,7 +20,7 @@ public class RecipeApiService {
 	@Value("${app.key}")
 	private String appKey;
 
-	public RecipeApiResponse recipeSearch(String searchTerms, int fromNum, int toNum) {
+	public RecipeApiResponse recipeSearch(String searchTerms, String fromNum, String toNum) {
 
 		String url = "https://api.edamam.com/search?q=" + searchTerms + "&app_id=" + appId + "&app_key=" + appKey
 				+ "&from=" + fromNum + "&to=" + toNum;
@@ -39,48 +39,53 @@ public class RecipeApiService {
 
 	}
 
-	public RecipeApiResponse recipeSearch(String searchTerms, String fromNum, String toNum, String diet, String health,
+	public RecipeApiResponse advancedRecipeSearch(
+			String searchTerms, 
+			String fromNum, 
+			String toNum, 
+			String diet, 
+			String health,
 			String calories, // must be sent as a string describing a range like "300-800"
 			String excluded) {
 
 		if (searchTerms != null && !searchTerms.equals("")) {
-			searchTerms = "q=" + searchTerms;
+			searchTerms = "&q=" + searchTerms;
 		} else {
 			searchTerms = "";
 		}
 
 		if (fromNum != null && !fromNum.equals("")) {
-			fromNum = "from=" + fromNum;
+			fromNum = "&from=" + fromNum;
 		} else {
 			fromNum = "";
 		}
 
 		if (toNum != null && !toNum.equals("")) {
-			toNum = "to=" + toNum;
+			toNum = "&to=" + toNum;
 		} else {
 			toNum = "";
 		}
 
 		if (diet != null && !diet.equals("")) {
-			diet = "diet=" + diet;
+			diet = "&diet=" + diet;
 		} else {
 			diet = "";
 		}
 
 		if (health != null && !health.equals("")) {
-			health = "health=" + health;
+			health = "&health=" + health;
 		} else {
 			health = "";
 		}
 
 		if (calories != null && !calories.equals("")) {
-			calories = "calories=" + calories;
+			calories = "&calories=" + calories;
 		} else {
 			calories = "";
 		}
 
 		if (excluded != null && !excluded.equals("")) {
-			excluded = "excluded=" + excluded;
+			excluded = "&excluded=" + excluded;
 		} else {
 			excluded = "";
 		}
