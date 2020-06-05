@@ -27,25 +27,24 @@
 <h1>Search for a Recipe</h1>
 
 <!-- Search bar -->
-<form  class= "search" id="advanced" action="/search"></form>
+<form  class= "search" id="advanced" action="/advanced-search">
 	
 	<section id="diet">
+		<input type="hidden" id="minNum" value="0">
 		<label><b>Diet: </b></label><br>
 	
 		<input type="checkbox" name="diet[]" id="diet1" value="balanced"/>
 		<label>balanced</label>
 		<input type="checkbox" name="diet[]" id="diet2" value="high-fiber"/>
 		<label>high fiber</label>
-		<input type="checkbox" name="diet[]" id="diet3" value="high-fiber"/>
-		<label>high fiber</label>
-		<input type="checkbox" name="diet[]" id="diet4" value="high-protein"/>
+		<input type="checkbox" name="diet[]" id="diet3" value="high-protein"/>
 		<label>high protein</label>
-		<input type="checkbox" name="diet[]" id="diet5" value="low-carb"/>
+		<input type="checkbox" name="diet[]" id="diet4" value="low-carb"/>
 		<label>low carb</label>
 		<br>
-		<input type="checkbox" name="diet[]" id="diet6" value="low-fat"/>
+		<input type="checkbox" name="diet[]" id="diet5" value="low-fat"/>
 		<label>low fat</label>
-		<input type="checkbox" name="diet[]" id="diet7" value="low-sodium"/>
+		<input type="checkbox" name="diet[]" id="diet6" value="low-sodium"/>
 		<label>low sodium</label>
 	
 	</section>
