@@ -36,7 +36,7 @@
 <c:forEach var="hit" items="${searchResult.hits}">
 
 
-<li><a href="/recipe?uri=${ hit.recipe.uri }" ">${hit.recipe.label}</a></li>
+<li><a href="/recipe?recipe=${ hit.recipe }" ">${hit.recipe.label}</a></li>
 
 
 

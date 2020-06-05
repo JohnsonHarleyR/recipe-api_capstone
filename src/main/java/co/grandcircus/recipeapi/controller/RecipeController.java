@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import co.grandcircus.recipeapi.RecipeApiService;
 import co.grandcircus.recipeapi.dao.UserDao;
-import co.grandcircus.recipeapi.model.OneRecipe;
+
 import co.grandcircus.recipeapi.model.Recipe;
 import co.grandcircus.recipeapi.model.RecipeApiResponse;
 import co.grandcircus.recipeapi.model.User;
@@ -129,11 +129,15 @@ public class RecipeController {
 		return "search";
 	}
 
+
+	// TODO NOT WORKING, Potential issue with double encoding...
 	// Individual recipe page
 	@RequestMapping("/recipe")
 	public String recipe(Model model, @RequestParam(name = "uri") String recipeUri) {
 
-		OneRecipe recipe = service.getOneRecipe(recipeUri);
+		System.out.println(recipeUri);
+		
+		Recipe recipe = service.getOneRecipe(recipeUri);
 		model.addAttribute("recipe", recipe);
 
 		// For the nav bar

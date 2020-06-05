@@ -3,10 +3,11 @@ package co.grandcircus.recipeapi;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import co.grandcircus.recipeapi.model.OneRecipe;
+
 import co.grandcircus.recipeapi.model.Recipe;
 import co.grandcircus.recipeapi.model.RecipeApiResponse;
 
@@ -30,11 +31,13 @@ public class RecipeApiService {
 
 	}
 
-	public OneRecipe getOneRecipe(String recipeUri) {
+	public Recipe getOneRecipe(String recipeUri) {
 
 		String url = "https://api.edamam.com/search?app_id=" + appId + "&app_key=" + appKey + "&r=" + recipeUri;
 
-		OneRecipe recipe = rest.getForObject(url, OneRecipe.class);
+		ResponseEntity<Recipe[]> recipeResponse = rest.getForEntity(url, Recipe[].class);
+		
+		Recipe recipe = recipeResponse.getBody()[0];
 
 		return recipe;
 
