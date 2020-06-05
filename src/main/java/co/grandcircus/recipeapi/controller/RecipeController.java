@@ -1,10 +1,12 @@
 package co.grandcircus.recipeapi.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,7 +41,7 @@ public class RecipeController {
 	
 	
 	
-	
+	//Home page
 	@RequestMapping("/")
 	public String homePage(Model model) {
 		
@@ -50,7 +52,7 @@ public class RecipeController {
 		return "index";
 	}
 	
-	
+	//Search for recipes
 	@RequestMapping("/search")
 	public String searchResult(@RequestParam(name="keyword") String keyword,
 			Model model) {
@@ -66,7 +68,7 @@ public class RecipeController {
 	}
 	
 	
-	
+	//Individual recipe page
 	
 	
 	
@@ -99,6 +101,23 @@ public class RecipeController {
 	//USER PAGES
 	
 	//Favorites page
+	@RequestMapping("/favorite")
+	public String favorites(Model model) {
+		
+		//get user
+		User user = (User)session.getAttribute("user");
+		
+		
+		model.addAttribute("loggedin", loggedIn);
+		//If user is not logged in, redirect to login page
+		if (loggedIn == false) {
+			return "redirect:/login";
+		} else {
+			model.addAttribute("user", user);
+			return "favorite";
+		}
+		
+	}
 	
 	
 	//Login page
@@ -152,6 +171,22 @@ public class RecipeController {
 		redir.addFlashAttribute("message", "You are now logged in, " + user.getName() + ".");
 		
 		return "redirect:/";
+	}
+	
+	//Logout
+	@RequestMapping("/logout")
+	public String logout(RedirectAttributes redir) {
+		
+		loginMessage = "Please enter your username and password.";
+		signUpMessage = "Please enter the following information.";
+		infoMessage = "Here is your user information.";
+		editMessage = "Edit your user info here.";
+		
+		//removes objects added to session
+		
+		session.invalidate();
+		loggedIn = false;
+		return "redirect:/login";
 	}
 	
 	//Sign up page
@@ -275,14 +310,56 @@ public class RecipeController {
 		model.addAttribute("loggedin", loggedIn);
 		model.addAttribute("message", editMessage);
 		
-		return "edit";
+		return "edit-user";
 	}
 	
 	
+	//Submit changes to user
+	@PostMapping("/user/edit/submit")
+	public String edit(
+		@RequestParam(value="userid") Long userId,
+		@RequestParam(value="username") String username,
+		@RequestParam(value="email") String email,
+		@RequestParam(value="password1") String password1,
+		@RequestParam(value="password2") String password2,
+		@RequestParam(value="name") String name,
+		Model model) {
 	
-	
-	
-	
-	
+		List<User> users = userRepo.findAll();
+		User us = (User)session.getAttribute("user");
+		User user = userRepo.findByUsername(us.getUsername()); //unnecessary steps - fix
+		
+		for (User u: users) {
+			if (u.getUsername().equals(username) && u.getId() != user.getId()) {
+				editMessage = "New username is unavailable. Please choose another.";
+				model.addAttribute("user", user);
+				model.addAttribute("loggedin", loggedIn);
+				model.addAttribute("message", infoMessage);
+				return "redirect:/user/edit";
+			}
+		}
+		
+		if (!password1.equals(password2)) {
+			editMessage = "Passwords did not match. Please try again.";
+			model.addAttribute("user", user);
+			model.addAttribute("loggedin", loggedIn);
+			model.addAttribute("message", editMessage);
+			return "redirect:/user/edit";
+		} else {
+			//make it so the email has to match a regex too
+			user.setUsername(username);
+			user.setEmail(email);
+			user.setPassword(password1);
+			user.setName(name);
+			userRepo.save(user);
+			session.setAttribute("user", user);
+			loggedIn = true;
+			infoMessage = "Information was successfully edited.";
+			return "redirect:/user-info";
+			
+		}
+		
+	}
+
 	
 }

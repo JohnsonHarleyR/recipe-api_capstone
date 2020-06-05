@@ -30,6 +30,12 @@
 	<ul class="nav">
 	
 		<li class="nav-item">
+			<form action="/search">
+			<!-- <label>Search: </label> -->
+			<input type="search" name="keyword" placeholder="Search" />
+			</form>
+		</li>
+		<li class="nav-item">
 			<a class="nav-link" href="/">Find Recipe</a>
 		</li>
 		<li class="nav-item">
@@ -38,13 +44,14 @@
 	</ul>
 
 	<ul class="nav">
+	
 		<li class="nav-item" >
 			<c:choose>
 				<c:when test="${loggedin == false}">
 					<a class="nav-link" href="/login">Sign In</a>
 				</c:when>
 				<c:when test="${loggedin == true}">
-				<a id="hello" class="nav-link" href="/"><c:out value="Hello, ${user.name}!"/></a>
+				<a id="hello" class="nav-link" href="/user-info"><c:out value="Hello, ${user.name}!"/></a>
 				</c:when>
 			</c:choose>
 		</li>
@@ -58,12 +65,8 @@
 				</c:when>
 			</c:choose>
 		</li>
-		<li class="nav-item">
-			<form action="/search">
-			<label>Search: </label>
-			<input type="search" name="keyword"/>
-			</form>
-		</li>
+		
+		
 	</ul>
 </nav>
 

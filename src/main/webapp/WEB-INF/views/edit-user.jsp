@@ -5,11 +5,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
-
-<!-- I just remembered it was mentioned that it's best not to use tables
-to establish a layout on the page. I will have to review the alternatives
-for the future. -->
-
 <head>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -18,7 +13,7 @@ for the future. -->
 <link href="/style.css" rel="stylesheet" />
 
 <meta charset="ISO-8859-1">
-<title>User Settings</title>
+<title>Edit User Information</title>
 </head>
 <body>
 
@@ -29,48 +24,47 @@ for the future. -->
 
 <!-- MainBody -->
 <main class="container">
+	<article>
+		<section class="card-header">
+			<h2>Edit User Information</h2>
+			
+		</section>
+		<section class="card-body">
+
+			<p id="editmsg2">
+			<i>${message}</i>
+			</p>
+			<p>
+			<form action="/user/edit/submit" method="post">
+			<input type="hidden" class="edit" name="userid" value="${user.id}"/>
+
+			<label id="i1">Username: </label><br>
+			<input id="t1" class="edit" type="text" name="username" value="${user.username}" required/>
+			</p>
+			<p>
+			<label id="i2">Email: </label><br>
+			<input id="t2" class="edit" type="text" name="email" value="${user.email}" required/>
+			</p>
+			<p>
+			<label id="i3">New Password: </label><br>
+			<input id="t3" class="edit" type="password" name="password1" value="${user.password}" required/>
+			</p>
+			<p>
+			<label id="i4">Re-enter password: </label><br>
+			<input id="t4" class="edit" type="password" name="password2" value="${user.password}" required/>
+			</p>
+			<p>
+			<label id="i5">First name: </label><br>
+			<input id="t5" type="text" name="name" value="${user.name}" required/>
+			</p>
+			<p  id="sub">
+			<button id="btnsub" type="submit" class="btn btn-light btn-lg">Submit Changes</button>
+			</p>
+			</form>
+		</section>
+	</article>
 
 
-<table>
-<tr>
-<th>
-<article>
-	<section class="card-header">
-		<h1>User Info</h1>			
-	</section>
-</article>
-</th>
-</tr>
-<tr>
-<td>
-<section class="card-body" id="info">
-<p id="editmsg">
-<i>${message}</i>
-</p>
-
-<p>
-<b>Username: </b> ${user.username}
-</p>
-<p>
-<b>Email: </b> ${user.email}
-</p>
-<p>
-<b>Password: </b> ${password}
-</p>
-<p>
-<b>First name: </b> ${user.name}
-</p>
-
-<p>
-<a href="/user/edit" id="btnedit"><button type="button" id="su"
-class="btn btn-light btn-lg">Edit Info</button></a>
-</p>
-
-</section>
-
-</td>
-</tr>
-</table>
 </main>
 
 </body>

@@ -13,7 +13,7 @@
 <link href="/style.css" rel="stylesheet" />
 
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>User Information</title>
 </head>
 <body>
 
