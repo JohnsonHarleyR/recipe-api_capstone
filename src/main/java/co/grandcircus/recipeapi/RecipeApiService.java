@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import co.grandcircus.recipeapi.model.OneRecipe;
 import co.grandcircus.recipeapi.model.Recipe;
 import co.grandcircus.recipeapi.model.RecipeApiResponse;
 
@@ -29,11 +30,11 @@ public class RecipeApiService {
 
 	}
 
-	public Recipe getOneRecipe(String recipeUri) {
+	public OneRecipe getOneRecipe(String recipeUri) {
 
 		String url = "https://api.edamam.com/search?app_id=" + appId + "&app_key=" + appKey + "&r=" + recipeUri;
 
-		Recipe recipe = rest.getForObject(url, Recipe.class);
+		OneRecipe recipe = rest.getForObject(url, OneRecipe.class);
 
 		return recipe;
 
