@@ -43,6 +43,9 @@ public class RecipeController {
 	// Home page
 	@RequestMapping("/")
 	public String homePage(Model model) {
+		
+		//Page variable
+		session.setAttribute("page", 1);
 
 		// For the nav bar
 		model.addAttribute("loggedin", loggedIn);
@@ -55,6 +58,13 @@ public class RecipeController {
 	public String nextResults(Model model, @RequestParam(name = "fromNum") String fromNum,
 			@RequestParam(name = "toNum") String toNum) {
 
+		
+		//next page
+		//somehow determine if you're on last page, then disallow next page
+		int page = (Integer)session.getAttribute("page");
+		page += 1;
+		session.setAttribute("page", page);
+		
 		return "redirect:/search";
 	}
 
@@ -62,6 +72,14 @@ public class RecipeController {
 	@RequestMapping("/previous")
 	public String previousResults(Model model, @RequestParam(name = "fromNum") String fromNum,
 			@RequestParam(name = "toNum") String toNum) {
+		
+		//previous page
+		int page = (Integer)session.getAttribute("page");
+		if (page != 0) {
+			page -= 1;
+		}
+		
+		session.setAttribute("page", page);
 
 		return "redirect:/search";
 	}
@@ -69,6 +87,9 @@ public class RecipeController {
 	// Advanced search form
 	@RequestMapping("/advanced")
 	public String advancedSearchPage(Model model) {
+		
+		//Page variable
+		session.setAttribute("page", 1);
 
 		// For the nav bar
 		model.addAttribute("loggedin", loggedIn);
@@ -107,9 +128,13 @@ public class RecipeController {
 
 		RecipeApiResponse response = service.advancedRecipeSearch(keyword, fromNum, toNum, diet, health, calories,
 				excluded);
-
+		
+		//Get page
+		int page = (Integer)session.getAttribute("page");
+		
+		model.addAttribute("page", page);
 		model.addAttribute("searchResult", response);
-
+		model.addAttribute("loggedin", loggedIn);
 		return "search";
 	}
 
@@ -120,7 +145,15 @@ public class RecipeController {
 
 		RecipeApiResponse response = service.recipeSearch(keyword, fromNum, toNum);
 
+		
+		//Get page
+		int page = (Integer)session.getAttribute("page");
+		
+		model.addAttribute("page", page);
 		model.addAttribute("searchResult", response);
+		model.addAttribute("min", fromNum);
+		model.addAttribute("max", toNum);
+		model.addAttribute("keyword", keyword);
 
 		// For the nav bar
 		model.addAttribute("loggedin", loggedIn);

@@ -47,9 +47,9 @@
 </ol>
 
 <section id="pages">
-<a href="#">prev</a>
-- (page #) -
-<a href="#">next</a>
+<a href="/prev?fromNum=${min}&toNum=${max}">prev</a>
+- ${page} -
+<a href="/next?fromNum=${min}&toNum=${max}">next</a>
 
 </section>
 
