@@ -33,19 +33,21 @@
 		<input type="hidden" name="fromNum" value="0">
 		<label><b>Diet: </b></label><br>
 	
-		<input type="checkbox" name="diet[]" id="diet1" value="balanced"/>
+		<input type="radio" name="diet" value="balanced"/>
 		<label>balanced</label>
-		<input type="checkbox" name="diet[]" id="diet2" value="high-fiber"/>
+		<input type="radio" name="diet" value="high-fiber"/>
 		<label>high fiber</label>
-		<input type="checkbox" name="diet[]" id="diet3" value="high-protein"/>
+		<input type="radio" name="diet" value="high-protein"/>
 		<label>high protein</label>
-		<input type="checkbox" name="diet[]" id="diet4" value="low-carb"/>
+		<input type="radio" name="diet" value="low-carb"/>
 		<label>low carb</label>
 		<br>
-		<input type="checkbox" name="diet[]" id="diet5" value="low-fat"/>
+		<input type="radio" name="diet" value="low-fat"/>
 		<label>low fat</label>
-		<input type="checkbox" name="diet[]" id="diet6" value="low-sodium"/>
+		<input type="radio" name="diet" value="low-sodium"/>
 		<label>low sodium</label>
+		<input type="radio" name="diet" value=""/>
+		<label>none</label>
 	
 	</section>
 	
@@ -53,25 +55,27 @@
 	
 		<label><b>Health: </b></label><br>
 		
-		<input type="checkbox" name="health[]" id="health1" value="vegetarian"/>
+		<input type="radio" name="health" value="vegetarian"/>
 		<label>vegetarian</label>
-		<input type="checkbox" name="health[]" id="health2" value="vegan"/>
+		<input type="radio" name="health" value="vegan"/>
 		<label>vegan</label>
-		<input type="checkbox" name="health[]" id="health3" value="dairy-free"/>
+		<input type="radio" name="health" value="dairy-free"/>
 		<label>dairy free</label>
-		<input type="checkbox" name="health[]" id="health4" value="gluten-free"/>
+		<input type="radio" name="health" value="gluten-free"/>
 		<label>gluten free</label>
-		<input type="checkbox" name="health[]" id="health5" value="keto-friendly"/>
+		<input type="radio" name="health" value="keto-friendly"/>
 		<label>keto friendly</label>
 		</br>
-		<input type="checkbox" name="health[]" id="health6" value="kosher"/>
+		<input type="radio" name="health" value="kosher"/>
 		<label>kosher</label>
-		<input type="checkbox" name="health[]" id="health7" value="no-oils-added"/>
+		<input type="radio" name="health" value="no-oils-added"/>
 		<label>no oils added</label>
-		<input type="checkbox" name="health[]" id="health8" value="low-sugar"/>
+		<input type="radio" name="health" value="low-sugar"/>
 		<label>low sugar</label>
-		<input type="checkbox" name="health[]" id="health9" value="paleo"/>
+		<input type="radio" name="health" value="paleo"/>
 		<label>paleo</label>
+		<input type="radio" name="health" value=""/>
+		<label>none</label>
 	
 	</section>
 	
@@ -82,25 +86,27 @@
 		<input type="text" name="min" value="0"/>
 		<label>Max:</label>
 		<input type="text" name="max" value="5000"/>
+		<br>
 	</section>
 	
-	<section id="excluded">
 	
+	
+			
+	
+	
+		
+	
+
+	<section id="search">
+		<label><b>Keyword:</b></label>
+		<input type="search" name="keyword" required/>
+		<br>
 		<label>Exclude:</label>
-		<input type="text" name="excluded"/>	
-	</section>
-	
-	<section id="perpage">
+		<input type="text" name="excluded"/>
+		<br>
 		<label>Results per page:</label>
 		<input type="text" name="toNum" value="10"/>
 	</section>
-	
-
-	
-	<label>Keyword: </section>
-	<input type="search" name="keyword" required/>
-		
-	
 	
 	<button class="" type="submit">Search</button>
 </form>
