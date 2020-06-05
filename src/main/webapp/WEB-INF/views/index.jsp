@@ -27,7 +27,7 @@
 <h1>Search for a Recipe</h1>
 
 <!-- Search bar -->
-<form action="/search">
+<form class="search" action="/search">
 <input type="search" name="keyword"/>
 
 
