@@ -37,7 +37,10 @@ public class RecipeController {
 	private String infoMessage = "Here is your user information.";
 	private String editMessage = "Edit your user info here.";
 	
-	@RequestMapping("/recipe")
+	
+	
+	
+	@RequestMapping("/")
 	public String homePage(Model model) {
 		
 		
@@ -46,6 +49,7 @@ public class RecipeController {
 		
 		return "index";
 	}
+	
 	
 	@RequestMapping("/search")
 	public String searchResult(@RequestParam(name="keyword") String keyword,
