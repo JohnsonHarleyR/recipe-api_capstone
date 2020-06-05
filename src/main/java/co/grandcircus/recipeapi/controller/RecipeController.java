@@ -81,7 +81,13 @@ public class RecipeController {
 	
 	
 	//Individual recipe page
-	
+	public String recipe(Model model) {
+		
+		
+		//For the nav bar
+		model.addAttribute("loggedin", loggedIn);
+		return "/recipe";
+	}
 	
 	
 	

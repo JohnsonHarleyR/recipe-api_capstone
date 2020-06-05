@@ -30,7 +30,9 @@
 <form action="/search">
 <input type="search" name="keyword"/>
 
+<br>
 **Add advanced search parameters here**
+<br>
 
 <button class="" type="submit">Search</button>
 </form>

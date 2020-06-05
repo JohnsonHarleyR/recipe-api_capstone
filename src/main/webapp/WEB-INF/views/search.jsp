@@ -46,6 +46,14 @@
 </c:forEach>
 </ol>
 
+<section id="pages">
+<a href="#">prev</a>
+- (page #) -
+<a href="#">next</a>
+
+</section>
+
+
 </main>
 
 </body>
