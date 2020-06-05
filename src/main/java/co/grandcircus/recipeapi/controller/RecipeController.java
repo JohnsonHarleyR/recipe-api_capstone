@@ -52,6 +52,18 @@ public class RecipeController {
 		return "index";
 	}
 	
+	//Advanced search page
+	@RequestMapping("advanced")
+	public String advancedSearch(Model model) {
+		
+		
+		//For the nav bar
+		model.addAttribute("loggedin", loggedIn);
+		
+		return "advanced";
+		
+	}
+	
 	//Search for recipes
 	@RequestMapping("/search")
 	public String searchResult(@RequestParam(name="keyword") String keyword,

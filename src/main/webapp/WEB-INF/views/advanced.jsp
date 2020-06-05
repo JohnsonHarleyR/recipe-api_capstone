@@ -30,10 +30,10 @@
 <form action="/search">
 <input type="search" name="keyword"/>
 
+**Add advanced search parameters here**
 
 <button class="" type="submit">Search</button>
 </form>
-<a href="/advanced">Advanced Search</a>
 
 
 </main>
