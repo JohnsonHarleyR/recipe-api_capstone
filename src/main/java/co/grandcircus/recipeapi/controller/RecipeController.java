@@ -133,7 +133,7 @@ public class RecipeController {
 		//Get page
 		int page = (Integer)session.getAttribute("page");
 		
-		model.addAttribute("page", page);
+		model.addAttribute("page", page); //page
 		model.addAttribute("searchResult", response);
 		model.addAttribute("loggedin", loggedIn);
 		return "search";

@@ -46,6 +46,8 @@
 </c:forEach>
 </ol>
 
+
+<!-- Do this a different way, it is adding numbers up when it shouldn't -->
 <section id="pages">
 <a href="/prev?fromNum=${min}&toNum=${max}">prev</a>
 - ${page} -

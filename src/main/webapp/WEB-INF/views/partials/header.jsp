@@ -62,9 +62,12 @@
 			<a class="nav-link" href="/favorite">Favorites</a>
 		</li>
 		
-
+<!-- I changed the from and to for search, may have to change back later -->
 		<li class="nav-item">
+			
 			<form action="/search">
+			<input type="hidden" name="fromNum" value="0"/>
+			<input type="hidden" name="toNum" value="9"/>
 			<!-- <label>Search: </label> -->
 			<input type="search" name="keyword" placeholder="Search" />
 			</form>
