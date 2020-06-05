@@ -27,21 +27,6 @@
 
 <!-- Navigation Bar -->
 <nav class="navbar navbar-custom">
-	<ul class="nav">
-	
-		<li class="nav-item">
-			<form action="/search">
-			<!-- <label>Search: </label> -->
-			<input type="search" name="keyword" placeholder="Search" />
-			</form>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="/">Find Recipe</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="/favorite">Favorite Recipes</a>
-		</li>
-	</ul>
 
 	<ul class="nav">
 	
@@ -66,8 +51,30 @@
 			</c:choose>
 		</li>
 		
+	</ul>
+
+	<ul class="nav">
+
+		<li class="nav-item">
+			<a class="nav-link" href="/">Find Recipes</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="/favorite">Favorites</a>
+		</li>
+		
+
+		<li class="nav-item">
+			<form action="/search">
+			<!-- <label>Search: </label> -->
+			<input type="search" name="keyword" placeholder="Search" />
+			</form>
+		</li>
 		
 	</ul>
+
+
+	
+	
 </nav>
 
 </main>
