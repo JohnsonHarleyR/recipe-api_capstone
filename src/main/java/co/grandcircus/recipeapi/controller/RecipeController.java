@@ -50,11 +50,25 @@ public class RecipeController {
 		return "index";
 	}
 	
-	// Next group of results
-//	@RequestMapping("/next")
-//	public String nextResults(Model model,)
+//	 Next group of results
+	@RequestMapping("/next")
+	public String nextResults(Model model,
+			@RequestParam(name = "fromNum") String fromNum,
+			@RequestParam(name = "toNum") String toNum) {
+		
+		return "redirect:/search";
+	}
+	
+//	 Previous group of results
+	@RequestMapping("/previous")
+	public String previousResults(Model model,
+			@RequestParam(name = "fromNum") String fromNum,
+			@RequestParam(name = "toNum") String toNum) {
+		
+		return "redirect:/search";
+	}
 
-	// Advanced search page
+	// Advanced search form
 	@RequestMapping("/advanced")
 	public String advancedSearchPage(Model model) {
 
@@ -65,6 +79,7 @@ public class RecipeController {
 
 	}
 
+	// Advanced search results
 	@RequestMapping("/advanced-search")
 	public String advancedSearchResult(@RequestParam(name = "keyword") String keyword,
 			@RequestParam(name = "fromNum") String fromNum, @RequestParam(name = "toNum") String toNum,
