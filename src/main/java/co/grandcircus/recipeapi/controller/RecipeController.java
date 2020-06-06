@@ -44,8 +44,8 @@ public class RecipeController {
 	// Home page
 	@RequestMapping("/")
 	public String homePage(Model model) {
-		
-		//Page variable
+
+		// Page variable
 		session.setAttribute("page", 1);
 
 		// For the nav bar
@@ -56,30 +56,47 @@ public class RecipeController {
 
 //	 Next group of results
 	@RequestMapping("/next")
-	public String nextResults(Model model, @RequestParam(name = "fromNum") String fromNum,
-			@RequestParam(name = "toNum") String toNum) {
+	public String nextResults(Model model) {
 
+		// next page
+		// somehow determine if you're on last page, then disallow next page
+//		int page = (Integer)session.getAttribute("page");
+//		page += 1;
+//		session.setAttribute("page", page);
+
+		String keyword = (String) session.getAttribute("keyword");
+		String fromNum = (String) session.getAttribute("fromNum");
+		String toNum = (String) session.getAttribute("toNum");
 		
-		//next page
-		//somehow determine if you're on last page, then disallow next page
-		int page = (Integer)session.getAttribute("page");
-		page += 1;
-		session.setAttribute("page", page);
+		Integer from = Integer.parseInt(fromNum);
+		from +=10;
+		Integer to = Integer.parseInt(toNum);
+		to +=10;
 		
-		return "redirect:/search";
+		session.setAttribute("keyword", keyword);
+		session.setAttribute("fromNum", from.toString());
+		session.setAttribute("toNum", to.toString());
+
+		RecipeApiResponse response = service.recipeSearch(keyword, from.toString(), to.toString());
+		
+		session.setAttribute("response", response);
+
+		model.addAttribute("searchResult", response);
+
+		return "search";
 	}
 
 //	 Previous group of results
 	@RequestMapping("/previous")
 	public String previousResults(Model model, @RequestParam(name = "fromNum") String fromNum,
 			@RequestParam(name = "toNum") String toNum) {
-		
-		//previous page
-		int page = (Integer)session.getAttribute("page");
+
+		// previous page
+		int page = (Integer) session.getAttribute("page");
 		if (page != 0) {
 			page -= 1;
 		}
-		
+
 		session.setAttribute("page", page);
 
 		return "redirect:/search";
@@ -88,8 +105,8 @@ public class RecipeController {
 	// Advanced search form
 	@RequestMapping("/advanced")
 	public String advancedSearchPage(Model model) {
-		
-		//Page variable
+
+		// Page variable
 		session.setAttribute("page", 1);
 
 		// For the nav bar
@@ -108,7 +125,7 @@ public class RecipeController {
 			@RequestParam(name = "min", required = false) String caloriesMin,
 			@RequestParam(name = "max", required = false) String caloriesMax,
 			@RequestParam(name = "excluded", required = false) String excluded, Model model) {
-		
+
 		System.out.println(keyword);
 		System.out.println(toNum);
 		System.out.println(fromNum);
@@ -117,11 +134,10 @@ public class RecipeController {
 		System.out.println(caloriesMin);
 		System.out.println(caloriesMax);
 		System.out.println(excluded);
-		
 
 		String calories = null;
-		
-		if (caloriesMin != null && caloriesMax != null) { 
+
+		if (caloriesMin != null && caloriesMax != null) {
 			calories = caloriesMin + "-" + caloriesMax;
 		} else {
 			calories = "";
@@ -129,11 +145,11 @@ public class RecipeController {
 
 		RecipeApiResponse response = service.advancedRecipeSearch(keyword, fromNum, toNum, diet, health, calories,
 				excluded);
-		
-		//Get page
-		int page = (Integer)session.getAttribute("page");
-		
-		model.addAttribute("page", page); //page
+
+		// Get page
+		int page = (Integer) session.getAttribute("page");
+
+		model.addAttribute("page", page); // page
 		model.addAttribute("searchResult", response);
 		model.addAttribute("loggedin", loggedIn);
 		return "search";
@@ -141,20 +157,52 @@ public class RecipeController {
 
 	// Search for recipes
 	@RequestMapping("/search")
-	public String searchResult(@RequestParam(name = "keyword") String keyword,
-			@RequestParam(name = "fromNum") String fromNum, @RequestParam(name = "toNum") String toNum, Model model) {
+	public String searchResult(@RequestParam(name = "keyword", required = false) String keyword,
+			@RequestParam(name = "from", required = false) String fromNum,
+			@RequestParam(name = "to", required = false) String toNum, Model model) {
 
-		RecipeApiResponse response = service.recipeSearch(keyword, fromNum, toNum);
+		String key;
+		String from;
+		String to;
+		
+		if (keyword == null) {
+			key = (String) session.getAttribute("keyword");
+		} else {
+			key = keyword;
+		}
+		
+		if (fromNum == null) {
+			from = (String) session.getAttribute("fromNum");
+		} else {
+			from = fromNum;
+		}
+		
+		if (toNum == null) {
+			to = (String) session.getAttribute("toNum");
+		} else {
+			to = toNum;
+		}
+		
+		RecipeApiResponse response = service.recipeSearch(key, from, to);
 
-		
-		//Get page
-		int page = (Integer)session.getAttribute("page");
-		
+//		session.setAttribute("response", response);
+//		session.setAttribute("keyword", key);
+//		session.setAttribute("fromNum", from);
+//		session.setAttribute("toNum", to);
+
+		// Get page
+		int page = (Integer) session.getAttribute("page");
+
 		model.addAttribute("page", page);
 		model.addAttribute("searchResult", response);
-		model.addAttribute("min", fromNum);
-		model.addAttribute("max", toNum);
+		model.addAttribute("min", from);
+		model.addAttribute("max", to);
 		model.addAttribute("keyword", keyword);
+		
+		session.setAttribute("response", response);
+		session.setAttribute("keyword", key);
+		session.setAttribute("fromNum", from);
+		session.setAttribute("toNum", to);
 
 		// For the nav bar
 		model.addAttribute("loggedin", loggedIn);
@@ -162,14 +210,13 @@ public class RecipeController {
 		return "search";
 	}
 
-
 	// TODO NOT WORKING, Potential issue with double encoding...
 	// Individual recipe page
 	@RequestMapping("/recipe")
 	public String recipe(Model model, @RequestParam(name = "uri") String recipeUri) {
 
 		System.out.println(recipeUri);
-		
+
 		Recipe recipe = service.getOneRecipe(recipeUri);
 		model.addAttribute("recipe", recipe);
 

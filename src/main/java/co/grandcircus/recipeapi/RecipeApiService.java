@@ -27,6 +27,17 @@ public class RecipeApiService {
 		String url = "https://api.edamam.com/search?q=" + searchTerms + "&app_id=" + appId + "&app_key=" + appKey
 				+ "&from=" + fromNum + "&to=" + toNum;
 
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println(url);
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		
 		return rest.getForObject(url, RecipeApiResponse.class);
 
 	}

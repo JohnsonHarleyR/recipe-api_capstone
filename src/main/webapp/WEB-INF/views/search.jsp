@@ -51,7 +51,7 @@
 <section id="pages">
 <a href="/prev?fromNum=${min}&toNum=${max}">prev</a>
 - ${page} -
-<a href="/next?fromNum=${min}&toNum=${max}">next</a>
+<a href="/next">next</a>
 
 </section>
 
