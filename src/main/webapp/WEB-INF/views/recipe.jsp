@@ -24,42 +24,85 @@
 
 <!-- MainBody -->
 <main class="container">
+	<h1>
+		${ recipe.label }
+	</h1>
+	
+	<div>
+		<img src="${ recipe.image }"/>
+	</div>
+	
+		<div>
+		<h3>Ingredients:</h3>
+		<ul>
+			<c:forEach items="${ recipe.ingredients }" var="ingredient">
+				<li>
+					${ ingredient.text }
+				</li>
+			</c:forEach>
+		</ul>
+	</div>	
+	
+	<div>
+		<h3>Servings: ${ recipe.yield }</h3>
+	</div>
+	
+	<div>
+		<h2>
+			<a href="${ recipe.url }" class="btn btn-dark">Full Recipe from ${ recipe.source }</a>
+		</h2>
+	</div>
+	
+	<div>
+		<h3>Dietary Information:</h3>
+		<ul>
+			<c:forEach items="${ recipe.dietLabels }" var="dietLabel">
+				<li>
+					${ dietLabel }
+				</li>
+			</c:forEach>
+		</ul>	
+	</div>
+	
+	<div>
+		<h3>Cautions:</h3>
+		<ul>
+			<c:forEach items="${ recipe.cautions }" var="caution">
+				<li>
+					${ caution }
+				</li>
+			</c:forEach>
+		</ul>
+	</div>
+	
+	<h3>Calories per serving: 
+	<fmt:formatNumber type="number" maxFractionDigits="0" value="${ recipe.calories/recipe.yield }" />
+	</h3>
 
-${ recipe.uri }
+	<h3>Total cooking time: 
+	<fmt:formatNumber type="number" maxFractionDigits="0" value="${ recipe.totalTime }" />
+	 minutes</h3>
+	 
+	 <h3>Nutrition Information:</h3>
 
-${ recipe.label }
-
-${ recipe.image }
-
-${ recipe.source }
-
-${ recipe.url }
-
-${ recipe.shareAs }
-
-${ recipe.yield }
-
-<c:forEach items="${ recipe.dietLabels }" var="dietLabel">
-	${ dietLabel }
-</c:forEach>
-
-<c:forEach items="${ recipe.cautions }" var="caution">
-	${ caution }
-</c:forEach>
-
-<c:forEach items="${ recipe.ingredients }" var="ingredient">
-	${ ingredient.text }
-	${ ingredient.weight }
-</c:forEach>
-
-${ recipe.calories }
-
-${ recipe.totalWeight }
-
-${ recipe.totalTime }
-
-
-
+	<ul>
+		<c:forEach items="${ recipe.digest }" var="dig">
+			<li>
+				${ dig.label } - 
+				<fmt:formatNumber type="number" maxFractionDigits="0" value="${ dig.total }" />
+				${ dig.unit } 
+			</li>
+			<ul>
+				<c:forEach items="${ dig.sub }" var="s">
+					<li>
+						${ s.label } -  
+						<fmt:formatNumber type="number" maxFractionDigits="0" value="${ s.total }" />
+						${ s.unit }	
+					</li>
+				</c:forEach>
+			</ul>	
+		</c:forEach>
+	</ul>
 
 </main>
 
