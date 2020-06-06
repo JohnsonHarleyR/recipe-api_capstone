@@ -26,20 +26,19 @@
 <main class="container">
 
 
-
+<article class="card text-left" style="width: 22rem;">
 <table>
 <tr>
 <th>
-<article>
+
 	<section class="card-header">
 		<h1>User Information</h1>		
 	</section>
-</article>
 </th>
 </tr>
 <tr>
 <td>
-<section class="card-body" id="info">
+<section class="card-body">
 <p id="editmsg">
 <i>${message}</i>
 </p>
@@ -66,8 +65,9 @@ class="btn btn-light btn-lg">Edit Info</button></a>
 
 </td>
 </tr>
-</table>
 
+</table>
+</article>
 
 
 

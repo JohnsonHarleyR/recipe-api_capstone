@@ -24,7 +24,7 @@
 
 <!-- MainBody -->
 <main class="container">
-
+<div id="center">
 
 <h1>Search Results</h1>
 
@@ -55,7 +55,7 @@
 
 </section>
 
-
+</div>
 </main>
 
 </body>

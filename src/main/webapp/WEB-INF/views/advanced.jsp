@@ -28,66 +28,63 @@
 
 <!-- Search bar -->
 <form  class= "search" id="advanced" action="/advanced-search">
-	
-	<section id="diet">
+	<section class="whole">
+	<article class="adv" id="diet">
 		<input type="hidden" name="fromNum" value="0">
 		<label><b>Diet: </b></label><br>
 	
-		<input type="radio" name="diet" value="balanced"/>
 		<label>balanced</label>
-		<input type="radio" name="diet" value="high-fiber"/>
+		<input type="radio" name="diet" value="balanced"/>
 		<label>high fiber</label>
-		<input type="radio" name="diet" value="high-protein"/>
+		<input type="radio" name="diet" value="high-fiber"/>
 		<label>high protein</label>
-		<input type="radio" name="diet" value="low-carb"/>
+		<input type="radio" name="diet" value="high-protein"/>
 		<label>low carb</label>
-		<br>
-		<input type="radio" name="diet" value="low-fat"/>
+		<input type="radio" name="diet" value="low-carb"/>
 		<label>low fat</label>
-		<input type="radio" name="diet" value="low-sodium"/>
+		<input type="radio" name="diet" value="low-fat"/>
 		<label>low sodium</label>
-		<input type="radio" name="diet" value=""/>
+		<input type="radio" name="diet" value="low-sodium"/>
 		<label>none</label>
+		<input type="radio" name="diet" value=""/>
 	
-	</section>
+	</article>
 	
-	<section id="health">
+	<article class="adv" id="health">
 	
 		<label><b>Health: </b></label><br>
 		
-		<input type="radio" name="health" value="vegetarian"/>
 		<label>vegetarian</label>
-		<input type="radio" name="health" value="vegan"/>
+		<input type="radio" name="health" value="vegetarian"/>
 		<label>vegan</label>
-		<input type="radio" name="health" value="dairy-free"/>
+		<input type="radio" name="health" value="vegan"/>
 		<label>dairy free</label>
-		<input type="radio" name="health" value="gluten-free"/>
+		<input type="radio" name="health" value="dairy-free"/>
 		<label>gluten free</label>
-		<input type="radio" name="health" value="keto-friendly"/>
+		<input type="radio" name="health" value="gluten-free"/>
 		<label>keto friendly</label>
-		</br>
-		<input type="radio" name="health" value="kosher"/>
+		<input type="radio" name="health" value="keto-friendly"/>
 		<label>kosher</label>
-		<input type="radio" name="health" value="no-oils-added"/>
+		<input type="radio" name="health" value="kosher"/>
 		<label>no oils added</label>
-		<input type="radio" name="health" value="low-sugar"/>
+		<input type="radio" name="health" value="no-oils-added"/>
 		<label>low sugar</label>
-		<input type="radio" name="health" value="paleo"/>
+		<input type="radio" name="health" value="low-sugar"/>
 		<label>paleo</label>
-		<input type="radio" name="health" value=""/>
+		<input type="radio" name="health" value="paleo"/>
 		<label>none</label>
+		<input type="radio" name="health" value=""/>
 	
-	</section>
+	</article>
 	
-	<section id="calories">
+	<article class="adv" id="calories">
 		<label><b>Calories: </b></label><br>
 		
 		<label>Min:</label>
-		<input type="text" name="min" value="0"/>
+		<input id="small1" type="text" name="min" value="0"/>
 		<label>Max:</label>
-		<input type="text" name="max" value="5000"/>
-		<br>
-	</section>
+		<input id="small2" type="text" name="max" value="5000"/>
+	</article>
 	
 	
 	
@@ -97,18 +94,20 @@
 		
 	
 
-	<section id="search">
+	<article class="adv" id="search">
+		<br>
+		<label>Results per page:</label>
+		<input id="small3" type="text" name="toNum" value="10"/><br>
 		<label><b>Keyword:</b></label>
 		<input type="search" name="keyword" required/>
 		<br>
 		<label>Exclude:</label>
 		<input type="text" name="excluded"/>
 		<br>
-		<label>Results per page:</label>
-		<input type="text" name="toNum" value="10"/>
-	</section>
+	</article>
 	
-	<button class="" type="submit">Search</button>
+	<button class="btn btn-light btn-lg" type="submit">Search</button>
+</section>
 </form>
 
 

@@ -341,6 +341,7 @@ public class RecipeController {
 			Model model) {
 
 		User user = (User) session.getAttribute("user");
+		
 
 		model.addAttribute("user", user);
 		model.addAttribute("loggedin", loggedIn);

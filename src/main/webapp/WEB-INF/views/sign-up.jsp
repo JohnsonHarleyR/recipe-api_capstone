@@ -27,7 +27,7 @@
 	
 	<c:choose>
 		<c:when test="${loggedin == false}">
-			<article>
+			<article class="card" style="width: 18rem;">
 				<section class="card-header">
 					<h2>Sign Up</h2>
 					

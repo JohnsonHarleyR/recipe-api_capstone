@@ -38,7 +38,7 @@ ${ recipe.url }
 
 ${ recipe.shareAs }
 
-${ recipe.yeild }
+${ recipe.yield }
 
 <c:forEach items="${ recipe.dietLabels }" var="dietLabel">
 	${ dietLabel }
