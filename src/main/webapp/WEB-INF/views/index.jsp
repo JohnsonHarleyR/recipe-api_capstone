@@ -28,8 +28,8 @@
 
 <!-- Search bar -->
 <form class="search" action="/search">
-<input type="hidden" name="fromNum" value="">
-<input type="hidden" name="toNum" value="">
+<input type="hidden" name="fromNum" value="${ fromNum }">
+<input type="hidden" name="toNum" value="${ toNum }">
 <input type="search" name="keyword"/>
 
 

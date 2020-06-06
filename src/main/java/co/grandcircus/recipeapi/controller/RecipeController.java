@@ -44,12 +44,21 @@ public class RecipeController {
 	// Home page
 	@RequestMapping("/")
 	public String homePage(Model model) {
+		
+		String defaultFrom = "0";
+		String defaultTo = "9";
 
 		// Page variable
 		session.setAttribute("page", 1);
 
 		// For the nav bar
 		model.addAttribute("loggedin", loggedIn);
+		model.addAttribute("fromNum", defaultFrom);
+		model.addAttribute("toNum", defaultTo);
+		
+		session.setAttribute("fromNum", defaultFrom);
+		session.setAttribute("toNum", defaultTo);
+		
 
 		return "index";
 	}
@@ -68,16 +77,25 @@ public class RecipeController {
 		String fromNum = (String) session.getAttribute("fromNum");
 		String toNum = (String) session.getAttribute("toNum");
 		
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println(fromNum);
+		System.out.println(toNum);
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		
 		Integer from = Integer.parseInt(fromNum);
 		from +=10;
 		Integer to = Integer.parseInt(toNum);
 		to +=10;
 		
 		session.setAttribute("keyword", keyword);
-		session.setAttribute("fromNum", from.toString());
-		session.setAttribute("toNum", to.toString());
+		session.setAttribute("fromNum", from + "");
+		session.setAttribute("toNum", to + "");
 
-		RecipeApiResponse response = service.recipeSearch(keyword, from.toString(), to.toString());
+		RecipeApiResponse response = service.recipeSearch(keyword, from  + "", to + "");
 		
 		session.setAttribute("response", response);
 
@@ -197,7 +215,7 @@ public class RecipeController {
 		model.addAttribute("searchResult", response);
 		model.addAttribute("min", from);
 		model.addAttribute("max", to);
-		model.addAttribute("keyword", keyword);
+		model.addAttribute("keyword", key);
 		
 		session.setAttribute("response", response);
 		session.setAttribute("keyword", key);
