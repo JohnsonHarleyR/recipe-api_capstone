@@ -11091,6 +11091,7 @@ form .search {
 .whole {
 	margin-left: auto;
 	margin-right: auto;
+	width: 50%;
 
 	/*border: 3px double blue;*/
 	
