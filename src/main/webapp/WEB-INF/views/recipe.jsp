@@ -25,7 +25,6 @@
 <!-- MainBody -->
 <main class="container">
 
-<!-- Recipe name goes here (ex.) ${recipe.name} -->
 ${ recipe.uri }
 
 ${ recipe.label }

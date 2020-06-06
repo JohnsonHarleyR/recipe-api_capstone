@@ -1,6 +1,7 @@
 package co.grandcircus.recipeapi.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import co.grandcircus.recipeapi.RecipeApiService;
 import co.grandcircus.recipeapi.dao.UserDao;
-
+import co.grandcircus.recipeapi.model.Hits;
 import co.grandcircus.recipeapi.model.Recipe;
 import co.grandcircus.recipeapi.model.RecipeApiResponse;
 import co.grandcircus.recipeapi.model.User;
@@ -40,56 +41,103 @@ public class RecipeController {
 	private String signUpMessage = "Please enter the following information.";
 	private String infoMessage = "Here is your user information.";
 	private String editMessage = "Edit your user info here.";
+	
+	private RecipeApiResponse response = new RecipeApiResponse();
 
 	// Home page
 	@RequestMapping("/")
 	public String homePage(Model model) {
 		
-		//Page variable
+		String defaultFrom = "0";
+		String defaultTo = "9";
+
+		// Page variable
 		session.setAttribute("page", 1);
 
 		// For the nav bar
 		model.addAttribute("loggedin", loggedIn);
+		model.addAttribute("fromNum", defaultFrom);
+		model.addAttribute("toNum", defaultTo);
+		
+		session.setAttribute("fromNum", defaultFrom);
+		session.setAttribute("toNum", defaultTo);
+		
 
 		return "index";
 	}
 
 //	 Next group of results
 	@RequestMapping("/next")
-	public String nextResults(Model model, @RequestParam(name = "fromNum") String fromNum,
-			@RequestParam(name = "toNum") String toNum) {
+	public String nextResults(Model model) {
 
+		// next page
+		// somehow determine if you're on last page, then disallow next page
+//		int page = (Integer)session.getAttribute("page");
+//		page += 1;
+//		session.setAttribute("page", page);
+
+		String keyword = (String) session.getAttribute("keyword");
+		String fromNum = (String) session.getAttribute("fromNum");
+		String toNum = (String) session.getAttribute("toNum");
 		
-		//next page
-		//somehow determine if you're on last page, then disallow next page
-		int page = (Integer)session.getAttribute("page");
-		page += 1;
-		session.setAttribute("page", page);
+		Integer from = Integer.parseInt(fromNum);
+		from +=10;
+		Integer to = Integer.parseInt(toNum);
+		to +=10;
 		
-		return "redirect:/search";
+		session.setAttribute("keyword", keyword);
+		session.setAttribute("fromNum", from + "");
+		session.setAttribute("toNum", to + "");
+
+		response = service.recipeSearch(keyword, from  + "", to + "");
+		
+		session.setAttribute("response", response);
+
+		model.addAttribute("searchResult", response);
+
+		return "search";
 	}
 
 //	 Previous group of results
 	@RequestMapping("/previous")
-	public String previousResults(Model model, @RequestParam(name = "fromNum") String fromNum,
-			@RequestParam(name = "toNum") String toNum) {
-		
-		//previous page
-		int page = (Integer)session.getAttribute("page");
-		if (page != 0) {
-			page -= 1;
-		}
-		
-		session.setAttribute("page", page);
+	public String previousResults(Model model) {
 
-		return "redirect:/search";
+//		// previous page
+//		int page = (Integer) session.getAttribute("page");
+//		if (page != 0) {
+//			page -= 1;
+//		}
+//
+//		session.setAttribute("page", page);
+		
+		String keyword = (String) session.getAttribute("keyword");
+		String fromNum = (String) session.getAttribute("fromNum");
+		String toNum = (String) session.getAttribute("toNum");
+		
+		Integer from = Integer.parseInt(fromNum);
+		from -=10;
+		Integer to = Integer.parseInt(toNum);
+		to -=10;
+		
+		session.setAttribute("keyword", keyword);
+		session.setAttribute("fromNum", from + "");
+		session.setAttribute("toNum", to + "");
+
+		response = service.recipeSearch(keyword, from  + "", to + "");
+		
+		session.setAttribute("response", response);
+
+		model.addAttribute("searchResult", response);
+
+		return "search";
+		
 	}
 
 	// Advanced search form
 	@RequestMapping("/advanced")
 	public String advancedSearchPage(Model model) {
-		
-		//Page variable
+
+		// Page variable
 		session.setAttribute("page", 1);
 
 		// For the nav bar
@@ -108,7 +156,7 @@ public class RecipeController {
 			@RequestParam(name = "min", required = false) String caloriesMin,
 			@RequestParam(name = "max", required = false) String caloriesMax,
 			@RequestParam(name = "excluded", required = false) String excluded, Model model) {
-		
+
 		System.out.println(keyword);
 		System.out.println(toNum);
 		System.out.println(fromNum);
@@ -117,23 +165,22 @@ public class RecipeController {
 		System.out.println(caloriesMin);
 		System.out.println(caloriesMax);
 		System.out.println(excluded);
-		
 
 		String calories = null;
-		
-		if (caloriesMin != null && caloriesMax != null) { 
+
+		if (caloriesMin != null && caloriesMax != null) {
 			calories = caloriesMin + "-" + caloriesMax;
 		} else {
 			calories = "";
 		}
 
-		RecipeApiResponse response = service.advancedRecipeSearch(keyword, fromNum, toNum, diet, health, calories,
+		response = service.advancedRecipeSearch(keyword, fromNum, toNum, diet, health, calories,
 				excluded);
-		
-		//Get page
-		int page = (Integer)session.getAttribute("page");
-		
-		model.addAttribute("page", page); //page
+
+		// Get page
+		int page = (Integer) session.getAttribute("page");
+
+		model.addAttribute("page", page); // page
 		model.addAttribute("searchResult", response);
 		model.addAttribute("loggedin", loggedIn);
 		return "search";
@@ -141,20 +188,52 @@ public class RecipeController {
 
 	// Search for recipes
 	@RequestMapping("/search")
-	public String searchResult(@RequestParam(name = "keyword") String keyword,
-			@RequestParam(name = "fromNum") String fromNum, @RequestParam(name = "toNum") String toNum, Model model) {
+	public String searchResult(@RequestParam(name = "keyword", required = false) String keyword,
+			@RequestParam(name = "from", required = false) String fromNum,
+			@RequestParam(name = "to", required = false) String toNum, Model model) {
 
-		RecipeApiResponse response = service.recipeSearch(keyword, fromNum, toNum);
+		String key;
+		String from;
+		String to;
+		
+		if (keyword == null) {
+			key = (String) session.getAttribute("keyword");
+		} else {
+			key = keyword;
+		}
+		
+		if (fromNum == null) {
+			from = (String) session.getAttribute("fromNum");
+		} else {
+			from = fromNum;
+		}
+		
+		if (toNum == null) {
+			to = (String) session.getAttribute("toNum");
+		} else {
+			to = toNum;
+		}
+		
+		response = service.recipeSearch(key, from, to);
 
-		
-		//Get page
-		int page = (Integer)session.getAttribute("page");
-		
+//		session.setAttribute("response", response);
+//		session.setAttribute("keyword", key);
+//		session.setAttribute("fromNum", from);
+//		session.setAttribute("toNum", to);
+
+		// Get page
+		int page = (Integer) session.getAttribute("page");
+
 		model.addAttribute("page", page);
 		model.addAttribute("searchResult", response);
-		model.addAttribute("min", fromNum);
-		model.addAttribute("max", toNum);
-		model.addAttribute("keyword", keyword);
+		model.addAttribute("min", from);
+		model.addAttribute("max", to);
+		model.addAttribute("keyword", key);
+		
+		session.setAttribute("response", response);
+		session.setAttribute("keyword", key);
+		session.setAttribute("fromNum", from);
+		session.setAttribute("toNum", to);
 
 		// For the nav bar
 		model.addAttribute("loggedin", loggedIn);
@@ -162,15 +241,36 @@ public class RecipeController {
 		return "search";
 	}
 
-
 	// TODO NOT WORKING, Potential issue with double encoding...
 	// Individual recipe page
 	@RequestMapping("/recipe")
-	public String recipe(Model model, @RequestParam(name = "uri") String recipeUri) {
+	public String recipe(Model model, @RequestParam(name = "recipe") String recipeLabel) {
 
-		System.out.println(recipeUri);
+		System.out.println(recipeLabel);
 		
-		Recipe recipe = service.getOneRecipe(recipeUri);
+		//RecipeApiResponse response = (RecipeApiResponse) session.getAttribute("response");
+		
+		List<Hits> hits = response.getHits();
+		
+		Recipe recipe = new Recipe();
+		
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println(recipeLabel);
+		System.out.println(recipe);
+		System.out.println(response);
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		
+		for (Hits hit : hits) {
+			if (hit.getRecipe().getLabel().equals(recipeLabel)) {
+				recipe = hit.getRecipe();
+			}
+		}
+				
 		model.addAttribute("recipe", recipe);
 
 		// For the nav bar

@@ -23,10 +23,36 @@ public class RecipeApiService {
 	private String appKey;
 
 	public RecipeApiResponse recipeSearch(String searchTerms, String fromNum, String toNum) {
+		
+		String from;
+		String to;
+		
+		if (fromNum == null) {
+			from = "";
+		} else {
+			from = "&from=" + fromNum;
+		}
+		
+		if (toNum == null) {
+			to = "";
+		} else {
+			to = "&to=" + toNum;
+		}
 
 		String url = "https://api.edamam.com/search?q=" + searchTerms + "&app_id=" + appId + "&app_key=" + appKey
-				+ "&from=" + fromNum + "&to=" + toNum;
+				+ from + to;
 
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println(url);
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		
 		return rest.getForObject(url, RecipeApiResponse.class);
 
 	}
