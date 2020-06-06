@@ -36,7 +36,7 @@
 <c:forEach var="hit" items="${searchResult.hits}">
 
 
-<li><a href="/recipe?recipe=${ hit.recipe }" ">${hit.recipe.label}</a></li>
+<li><a href="/recipe?recipe=${ hit.recipe.label }">${hit.recipe.label}</a></li>
 
 
 
@@ -49,7 +49,7 @@
 
 <!-- Do this a different way, it is adding numbers up when it shouldn't -->
 <section id="pages">
-<a href="/prev?fromNum=${min}&toNum=${max}">prev</a>
+<a href="/previous">prev</a>
 - ${page} -
 <a href="/next">next</a>
 

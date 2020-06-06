@@ -25,7 +25,6 @@
 <!-- MainBody -->
 <main class="container">
 
-<!-- Recipe name goes here (ex.) ${recipe.name} -->
 ${ recipe.uri }
 
 ${ recipe.label }
@@ -38,7 +37,7 @@ ${ recipe.url }
 
 ${ recipe.shareAs }
 
-${ recipe.yeild }
+${ recipe.yield }
 
 <c:forEach items="${ recipe.dietLabels }" var="dietLabel">
 	${ dietLabel }

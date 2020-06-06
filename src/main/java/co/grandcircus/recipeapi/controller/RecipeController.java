@@ -1,6 +1,7 @@
 package co.grandcircus.recipeapi.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import co.grandcircus.recipeapi.RecipeApiService;
 import co.grandcircus.recipeapi.dao.UserDao;
-
+import co.grandcircus.recipeapi.model.Hits;
 import co.grandcircus.recipeapi.model.Recipe;
 import co.grandcircus.recipeapi.model.RecipeApiResponse;
 import co.grandcircus.recipeapi.model.User;
@@ -40,6 +41,8 @@ public class RecipeController {
 	private String signUpMessage = "Please enter the following information.";
 	private String infoMessage = "Here is your user information.";
 	private String editMessage = "Edit your user info here.";
+	
+	private RecipeApiResponse response = new RecipeApiResponse();
 
 	// Home page
 	@RequestMapping("/")
@@ -77,15 +80,6 @@ public class RecipeController {
 		String fromNum = (String) session.getAttribute("fromNum");
 		String toNum = (String) session.getAttribute("toNum");
 		
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println(fromNum);
-		System.out.println(toNum);
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		
 		Integer from = Integer.parseInt(fromNum);
 		from +=10;
 		Integer to = Integer.parseInt(toNum);
@@ -95,7 +89,7 @@ public class RecipeController {
 		session.setAttribute("fromNum", from + "");
 		session.setAttribute("toNum", to + "");
 
-		RecipeApiResponse response = service.recipeSearch(keyword, from  + "", to + "");
+		response = service.recipeSearch(keyword, from  + "", to + "");
 		
 		session.setAttribute("response", response);
 
@@ -106,18 +100,37 @@ public class RecipeController {
 
 //	 Previous group of results
 	@RequestMapping("/previous")
-	public String previousResults(Model model, @RequestParam(name = "fromNum") String fromNum,
-			@RequestParam(name = "toNum") String toNum) {
+	public String previousResults(Model model) {
 
-		// previous page
-		int page = (Integer) session.getAttribute("page");
-		if (page != 0) {
-			page -= 1;
-		}
+//		// previous page
+//		int page = (Integer) session.getAttribute("page");
+//		if (page != 0) {
+//			page -= 1;
+//		}
+//
+//		session.setAttribute("page", page);
+		
+		String keyword = (String) session.getAttribute("keyword");
+		String fromNum = (String) session.getAttribute("fromNum");
+		String toNum = (String) session.getAttribute("toNum");
+		
+		Integer from = Integer.parseInt(fromNum);
+		from -=10;
+		Integer to = Integer.parseInt(toNum);
+		to -=10;
+		
+		session.setAttribute("keyword", keyword);
+		session.setAttribute("fromNum", from + "");
+		session.setAttribute("toNum", to + "");
 
-		session.setAttribute("page", page);
+		response = service.recipeSearch(keyword, from  + "", to + "");
+		
+		session.setAttribute("response", response);
 
-		return "redirect:/search";
+		model.addAttribute("searchResult", response);
+
+		return "search";
+		
 	}
 
 	// Advanced search form
@@ -161,7 +174,7 @@ public class RecipeController {
 			calories = "";
 		}
 
-		RecipeApiResponse response = service.advancedRecipeSearch(keyword, fromNum, toNum, diet, health, calories,
+		response = service.advancedRecipeSearch(keyword, fromNum, toNum, diet, health, calories,
 				excluded);
 
 		// Get page
@@ -201,7 +214,7 @@ public class RecipeController {
 			to = toNum;
 		}
 		
-		RecipeApiResponse response = service.recipeSearch(key, from, to);
+		response = service.recipeSearch(key, from, to);
 
 //		session.setAttribute("response", response);
 //		session.setAttribute("keyword", key);
@@ -231,11 +244,33 @@ public class RecipeController {
 	// TODO NOT WORKING, Potential issue with double encoding...
 	// Individual recipe page
 	@RequestMapping("/recipe")
-	public String recipe(Model model, @RequestParam(name = "uri") String recipeUri) {
+	public String recipe(Model model, @RequestParam(name = "recipe") String recipeLabel) {
 
-		System.out.println(recipeUri);
-
-		Recipe recipe = service.getOneRecipe(recipeUri);
+		System.out.println(recipeLabel);
+		
+		//RecipeApiResponse response = (RecipeApiResponse) session.getAttribute("response");
+		
+		List<Hits> hits = response.getHits();
+		
+		Recipe recipe = new Recipe();
+		
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println(recipeLabel);
+		System.out.println(recipe);
+		System.out.println(response);
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		
+		for (Hits hit : hits) {
+			if (hit.getRecipe().getLabel().equals(recipeLabel)) {
+				recipe = hit.getRecipe();
+			}
+		}
+				
 		model.addAttribute("recipe", recipe);
 
 		// For the nav bar
