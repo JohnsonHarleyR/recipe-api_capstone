@@ -17,18 +17,13 @@
 </head>
 <body>
 
-<!-- Header -->
-<section class="header">
-
-</section>
 
 <!-- MainBody -->
-<main class="container">
 
 <!-- Navigation Bar -->
 <nav class="navbar navbar-custom">
 
-	<ul class="nav">
+	<ul class="nav" width="100%">
 	
 		<li class="nav-item" >
 			<c:choose>
@@ -79,8 +74,6 @@
 	
 	
 </nav>
-
-</main>
 
 </body>
 </html>

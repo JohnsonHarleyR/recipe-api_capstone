@@ -11073,6 +11073,10 @@ main {
 	text-align: center;
 }
 
+nav {
+	background-color: #AA2A3A;
+}
+
 form .search {
 	margin-left: auto;
 	margin-right: auto;
