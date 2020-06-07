@@ -27,22 +27,25 @@
 	
 	<c:choose>
 		<c:when test="${loggedin == false}">
-			<article class="card" style="width: 18rem;">
+			<article class="card" style="width: 22rem;">
 				<section class="card-header">
 					<h2>Sign Up</h2>
 					
 				</section>
 				<section class="card-body">
+				<form action="/sign-up/submit" method="post">
 				<table id="tableform">
 				
 					<tr>
-					<td id="editmsg2">
+					<td id="msg">
 					${message}
+					<br>
+					
 					</td>
 					</tr>
 					<tr>
 					<td>
-					<form action="/sign-up/submit" method="post">
+					
 					
 					<label id="i1">Username: </label><br>
 					<input id="t1" type="text" name="username" required/>
@@ -79,13 +82,15 @@
 					
 					<tr>
 					<td>
-					<button id="su" type="submit" class="btn btn-light btn-lg">Sign Up</button>
+					<button id="su" style="float: left" type="submit" class="btn btn-light btn-lg">Sign Up</button>
 					<a href="/login"><button type="button" id="si" style="float: right;"
 					 class="btn btn-light btn-lg">Sign In</button></a>
-					</form>
+					
 					</td>
 					</tr>
 					</table>
+					
+					</form>
 				</section>
 			</article>
 		</c:when>

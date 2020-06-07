@@ -1,13 +1,11 @@
 package co.grandcircus.recipeapi.controller;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,9 +70,7 @@ public class RecipeController {
 
 		// next page
 		// somehow determine if you're on last page, then disallow next page
-//		int page = (Integer)session.getAttribute("page");
-//		page += 1;
-//		session.setAttribute("page", page);
+
 
 		String keyword = (String) session.getAttribute("keyword");
 		String fromNum = (String) session.getAttribute("fromNum");
@@ -94,6 +90,7 @@ public class RecipeController {
 		session.setAttribute("response", response);
 
 		model.addAttribute("searchResult", response);
+		model.addAttribute("loggedin", loggedIn);
 
 		return "search";
 	}
@@ -128,6 +125,7 @@ public class RecipeController {
 		session.setAttribute("response", response);
 
 		model.addAttribute("searchResult", response);
+		model.addAttribute("loggedin", loggedIn);
 
 		return "search";
 		
@@ -307,6 +305,7 @@ public class RecipeController {
 		User user = (User) session.getAttribute("user");
 
 		model.addAttribute("loggedin", loggedIn);
+		
 		// If user is not logged in, redirect to login page
 		if (loggedIn == false) {
 			return "redirect:/login";
@@ -323,6 +322,7 @@ public class RecipeController {
 
 		// tell nav bar whether user is logged in
 		model.addAttribute("loggedin", loggedIn);
+		model.addAttribute("message", loginMessage);
 
 		return "login";
 	}
@@ -388,6 +388,7 @@ public class RecipeController {
 
 		// tell nav bar whether user is logged in
 		model.addAttribute("loggedin", loggedIn);
+		model.addAttribute("message", signUpMessage);
 
 		return "sign-up";
 	}

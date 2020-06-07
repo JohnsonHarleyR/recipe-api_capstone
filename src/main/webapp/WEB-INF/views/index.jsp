@@ -22,23 +22,24 @@
 <%@ include file="partials/header.jsp" %>
 </section>
 
-<!-- MainBody -->
-<main class="container">
-<h1>Search for a Recipe</h1>
-
-<!-- Search bar -->
-<form class="search" action="/search">
-<input type="hidden" name="fromNum" value="${ fromNum }">
-<input type="hidden" name="toNum" value="${ toNum }">
-<input type="search" name="keyword"/>
-
-
-<button class="" type="submit">Search</button>
-</form>
-<a href="/advanced">Advanced Search</a>
-
-
-</main>
+	<!-- MainBody -->
+	<main class="container">
+	<section id="mp">
+		<h1>Search for a Recipe</h1>
+		
+		<!-- Search bar -->
+		<form class="search" action="/search">
+			<input type="hidden" name="fromNum" value="${ fromNum }">
+			<input type="hidden" name="toNum" value="${ toNum }">
+			<input type="search" name="keyword"/>
+			
+			
+			<button class="" type="submit">Search</button>
+		</form>
+		<a href="/advanced">Advanced Search</a>
+	
+	</section>
+	</main>
 
 </body>
 </html>

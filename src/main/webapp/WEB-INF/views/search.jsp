@@ -26,12 +26,16 @@
 <main class="container">
 <div id="center">
 
+<article class="card" style="width: 22rem;">
+
+<article class="card-header">
+
 <h1>Search Results</h1>
 
 
 
-<!-- **Search bar goes here?** -->
-
+</article>
+<article class="card-body" id="results">
 <ol>
 <c:forEach var="hit" items="${searchResult.hits}">
 
@@ -45,15 +49,20 @@
 
 </c:forEach>
 </ol>
-
+</article>
 
 <!-- Do this a different way, it is adding numbers up when it shouldn't -->
 <section id="pages">
 <a href="/previous">prev</a>
 - ${page} -
 <a href="/next">next</a>
-
+<br>
+<br>
 </section>
+
+
+
+</article>
 
 </div>
 </main>

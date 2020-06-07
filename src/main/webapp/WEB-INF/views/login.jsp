@@ -28,7 +28,7 @@
 	
 	<c:choose>
 		<c:when test="${loggedin == false}">
-			<article class="card text-left" style="width: 18rem;">
+			<article class="card text-left" style="width: 20rem;">
 				<section class="card-header">
 					<h2>Please Sign In</h2>
 					
@@ -38,7 +38,7 @@
 				<table id="tableform">
 					
 					<tr>
-					<td id="editmsg2">
+					<td id="msg">
 					${message}
 					</td>
 					</tr>
@@ -55,6 +55,8 @@
 					<td>
 					<label id="i2">Password: </label><br>
 					<input id="t2" type="password" name="password" required/>
+					<br>
+					<br>
 					</td>
 					</tr>
 					<tr>

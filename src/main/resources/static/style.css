@@ -11091,7 +11091,7 @@ form .search {
 .whole {
 	margin-left: auto;
 	margin-right: auto;
-	width: 50%;
+	/*width: 50%;*/
 
 	/*border: 3px double blue;*/
 	
@@ -11110,7 +11110,7 @@ form .search {
 	text-align: left;
 
 	/*border: 3px double green;*/
-	width: 75%;
+	/*width: 75%; */
 }
 
 #small1, #small2, #small3 {
@@ -11135,18 +11135,30 @@ form .search {
 
 }
 
+#results {
+	text-align: left;
+}
+
 #i1, #i2, #i3, #i4, #i5 {
 	font-size: large;
+	float: left;
 }
 
 #t1, #t2, #t3, #t4, #t5 {
 	width: 100%;
+
 }
 
 #tableform {
 	margin: auto;
 }
 
+#msg {
+	padding-bottom: 10px;
+}
 
+#mp {
+	padding: 70px 0;
+}
 
 
