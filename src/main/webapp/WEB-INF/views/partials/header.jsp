@@ -51,10 +51,11 @@
 	<ul class="nav">
 
 		<li class="nav-item">
-			<a class="nav-link" href="/">Find Recipes</a>
-		</li>
-		<li class="nav-item">
 			<a class="nav-link" href="/favorite">Favorites</a>
+		</li>
+		
+		<li class="nav-item">
+			<a class="nav-link" href="/">Home</a>
 		</li>
 		
 <!-- I changed the from and to for search, may have to change back later -->
@@ -64,10 +65,14 @@
 			<input type="hidden" name="fromNum" value="0"/>
 			<input type="hidden" name="toNum" value="9"/>
 			<!-- <label>Search: </label> -->
-			<input type="search" name="keyword" placeholder="Search" />
+			<input class="form-control mr-sm-2" type="search" name="keyword" placeholder="Search" />
 			</form>
 		</li>
-		
+		<!-- 
+		<li class="nav-item">
+			<a id="srch" class="btn btn-light" href="/">Search</a>
+		</li>
+		 -->
 	</ul>
 
 

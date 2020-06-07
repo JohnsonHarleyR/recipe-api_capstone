@@ -11070,6 +11070,8 @@ legend {
 
 
 main {
+	padding-top: 40px;
+
 	text-align: center;
 }
 
@@ -11090,6 +11092,10 @@ form .search {
 	/*border: 3px double red;*/
 
 	
+}
+
+#srch {
+	margin-left: 5px;
 }
 
 .whole {
@@ -11162,7 +11168,7 @@ form .search {
 }
 
 #mp {
-	padding: 70px 0;
+	padding: 50px 0;
 }
 
 #panda {
