@@ -75,10 +75,8 @@
 		</c:when>
 		
 		<c:otherwise>
-			<section>
-				<h1>${user.name}, you are already logged in!</h1>
-			</section>
 			<section id="panda">
+				<h1>${user.name}, you are already logged in!</h1>
 				<img width=300px src="/confused-panda-brown.png">
 			</section>
 		</c:otherwise>

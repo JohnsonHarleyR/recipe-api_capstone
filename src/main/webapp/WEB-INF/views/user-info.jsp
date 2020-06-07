@@ -26,7 +26,7 @@
 <main class="container">
 
 
-<article class="card text-left" style="width: 22rem;">
+<article class="card text-left" style="width: 19rem;">
 <table>
 <tr>
 <th>
@@ -56,8 +56,8 @@
 <b>First name: </b> ${user.name}
 </p>
 
-<p>
-<a href="/user/edit" id="btnedit"><button type="button" id="su"
+<p id="sub">
+<a href="/user/edit" id="btnedit"><button type="button" id="btnsub"
 class="btn btn-light btn-lg">Edit Info</button></a>
 </p>
 

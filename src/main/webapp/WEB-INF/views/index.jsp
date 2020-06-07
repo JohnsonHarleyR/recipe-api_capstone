@@ -31,10 +31,10 @@
 		<form class="search" action="/search">
 			<input type="hidden" name="fromNum" value="${ fromNum }">
 			<input type="hidden" name="toNum" value="${ toNum }">
-			<input type="search" name="keyword"/>
+			<input type="search" name="keyword" required/>
 			
 			
-			<button class="" type="submit">Search</button>
+			<button class="btn btn-light" type="submit">Search</button>
 		</form>
 		<a href="/advanced">Advanced Search</a>
 	

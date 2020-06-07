@@ -24,7 +24,7 @@
 
 <!-- MainBody -->
 <main class="container">
-	<article class="card" style="width: 18rem;">
+	<article class="card" style="width: 22rem;">
 		<section class="card-header">
 			<h2>Edit User Information</h2>
 			
