@@ -93,17 +93,24 @@ public class RecipeController {
 	@PostMapping("/favorite/add")
 	public String addFavorite(
 			@RequestParam(value = "name") String label,
-			@RequestParam(value = "url") String url,
-			@RequestParam(value = "image-url") String imageUrl,
-			@RequestParam(value = "userid") Long userId,
+			@RequestParam(value = "imageurl") String imageUrl,
 			Model model) {
 		
+		//Get user
+		User user = (User)session.getAttribute("user");
+		
+		//Create url string
+		String url = "/recipe?recipe=" + label;
+		
 		//Create new favorite
-		Favorite favorite = new Favorite(label, url, imageUrl, userId);
+		Favorite favorite = new Favorite(label, url, imageUrl, user.getId());
 		//Save to favorite
 		favoriteRepo.save(favorite);
 		
-		return "recipe";
+		System.out.println(url);
+		System.out.println(label);
+		
+		return "redirect:" + url;
 	}
 
 //	 Next group of results

@@ -54,9 +54,17 @@
 	</div>
 	
 	<div>
+		<form action="/favorite/add" method="post">
 		<h2>
-			<a href="/favorite?name="${ recipe.label }" class="btn btn-light">Save Favorite!</a>
+			
+			<input type="hidden" name="name" value="${recipe.label}"/>
+			<input type="hidden" name="url" value="${recipe.url}"/>
+			<input type="hidden" name="imageurl" value="${recipe.image}"/>
+			
+			<button  type="submit" url="/favorite/add" class="btn btn-light">Save Favorite!</button>
+			
 		</h2>
+		</form>
 	</div>
 	
 	

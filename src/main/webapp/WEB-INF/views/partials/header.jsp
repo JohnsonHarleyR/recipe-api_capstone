@@ -51,7 +51,7 @@
 	<ul class="nav">
 
 		<li class="nav-item">
-			<a class="nav-link" href="/favorite">Favorites</a>
+			<a class="nav-link" href="/favorite-list">Favorites</a>
 		</li>
 		
 		<li class="nav-item">
