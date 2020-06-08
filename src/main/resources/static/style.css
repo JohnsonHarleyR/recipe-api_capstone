@@ -11251,3 +11251,11 @@ form .search {
 button {
 	color: #ffffff;
 }
+
+#full a:visited {
+	color: #ffffff;
+}
+
+#home {
+	color: #000000;
+}

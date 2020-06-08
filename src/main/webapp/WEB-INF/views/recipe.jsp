@@ -49,7 +49,7 @@
 	
 	<div>
 		<h2>
-			<a href="${ recipe.url }" class="btn btn-dark" target="_blank">Full Recipe from ${ recipe.source }</a>
+			<a href="${ recipe.url }" id="full" class="btn btn-dark" target="_blank">Full Recipe from ${ recipe.source }</a>
 		</h2>
 	</div>
 	
