@@ -38,7 +38,7 @@
 <article class="card-body" id="results">
 
 <c:choose>
-<c:when test="${favorites > 0}">
+<c:when test="${listsize > 0}">
 
 
 <ol>

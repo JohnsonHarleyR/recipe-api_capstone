@@ -75,13 +75,19 @@ public class RecipeController {
 		//Get current user
 		User user = (User)session.getAttribute("user");
 		
-		if (user == null) {
+		List<Favorite> favorites = new ArrayList<>();
+		int listSize = 0;
+		
+		if (!loggedIn) {
 			return "login";
 		} else {
 			//Get list of their favorite recipes
-			List<Favorite> favorite = favoriteRepo.findByUserId(user.getId());
+			 favorites = favoriteRepo.findByUserId(user.getId());
 			
-			model.addAttribute(favorite);
+			listSize = favorites.size();
+			
+			model.addAttribute("listsize", listSize);
+			model.addAttribute("favorites", favorites);
 			model.addAttribute("loggedin", loggedIn);
 			return "favorite";
 		}
@@ -96,19 +102,40 @@ public class RecipeController {
 			@RequestParam(value = "imageurl") String imageUrl,
 			Model model) {
 		
+		boolean exists = false;
+		
 		//Get user
 		User user = (User)session.getAttribute("user");
+		
+		//Get list of their favorite recipes
+		List<Favorite> favorites = favoriteRepo.findByUserId(user.getId());
+		
+		/*
+		//See if favorite already exists
+		exists = doesFavoriteExist(favorites, label);
+		*/
 		
 		//Create url string
 		String url = "/recipe?recipe=" + label;
 		
-		//Create new favorite
-		Favorite favorite = new Favorite(label, url, imageUrl, user.getId());
-		//Save to favorite
-		favoriteRepo.save(favorite);
+		//Loop through favorites to see if it exists already
+		
+		
+		
+		//Create new favorite - if it doesn't exist
+		if (!exists) {
+			Favorite favorite = new Favorite(label, url, imageUrl, user.getId());
+			//Save to favorite
+			favoriteRepo.save(favorite);
+		}
 		
 		System.out.println(url);
 		System.out.println(label);
+		
+		/*
+		//Set button message
+		model.addAttribute("button", "Saved");
+		*/
 		
 		return "redirect:" + url;
 	}
@@ -295,6 +322,24 @@ public class RecipeController {
 
 		System.out.println(recipeLabel);
 		
+		//For seeing if recipe has been favorited already
+		boolean exists = false;
+		User user = (User)session.getAttribute("user");
+		List<Favorite> favorites = favoriteRepo.findByUserId(user.getId());
+		String buttonMessage;
+		
+		//Determine if favorite exists
+		exists = doesFavoriteExist(favorites, recipeLabel);
+		
+		checkLogin();
+		
+		//Set favorite button message
+		if (exists) {
+			buttonMessage = "Saved";
+		} else {
+			buttonMessage = "Save Favorite!";
+		}
+		
 		//RecipeApiResponse response = (RecipeApiResponse) session.getAttribute("response");
 		
 		List<Hits> hits = response.getHits();
@@ -308,6 +353,7 @@ public class RecipeController {
 		}
 				
 		model.addAttribute("recipe", recipe);
+		model.addAttribute("button", buttonMessage);
 
 		// For the nav bar
 		model.addAttribute("loggedin", loggedIn);
@@ -341,11 +387,18 @@ public class RecipeController {
 
 		// get user
 		User user = (User) session.getAttribute("user");
+		
+		//Check if logged in
+		checkLogin();
+		
 
 		model.addAttribute("loggedin", loggedIn);
 		
+		
+		
 		// If user is not logged in, redirect to login page
-		if (loggedIn == false) {
+		if (!loggedIn) {
+			model.addAttribute("loggedin", login);
 			return "redirect:/login";
 		} else {
 			model.addAttribute("user", user);
@@ -399,7 +452,7 @@ public class RecipeController {
 
 		// I don't think this is actually needed with the way I'm doing it
 		// but it is a nifty thing
-		redir.addFlashAttribute("message", "You are now logged in, " + user.getName() + ".");
+		//redir.addFlashAttribute("message", "You are now logged in, " + user.getName() + ".");
 
 		return "redirect:/";
 	}
@@ -575,7 +628,37 @@ public class RecipeController {
 			return "redirect:/user-info";
 
 		}
-
+		
+		
 	}
+	
+	
+	
+	//Extra methods
+
+	//Find if favorite exists
+	public boolean doesFavoriteExist(List<Favorite> favorites, String label) {
+		boolean exists = false;
+		
+		for (Favorite favorite: favorites) {
+			if (favorite.getLabel().equals(label)) {
+				exists = true;
+			}
+		}
+		
+		return exists;
+	}
+	
+	public void checkLogin() {
+		User user = (User)session.getAttribute("user");
+		
+		if (user == null) {
+			loggedIn = false;
+		} else {
+			loggedIn = true;
+		}
+		
+	}
+	
 
 }

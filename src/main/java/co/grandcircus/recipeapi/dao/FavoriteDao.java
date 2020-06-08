@@ -10,4 +10,5 @@ public interface FavoriteDao extends JpaRepository<Favorite, Long> {
 	
 	List<Favorite> findByUserId (Long id);
 	
+	
 }
