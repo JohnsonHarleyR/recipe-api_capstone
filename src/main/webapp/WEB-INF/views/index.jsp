@@ -34,7 +34,7 @@
 			<input type="search" name="keyword" required/>
 			
 			
-			<button class="btn btn-light" type="submit">Search</button>
+			<button class="btn btn-dark" type="submit">Search</button>
 		</form>
 		<a href="/advanced">Advanced Search</a>
 	

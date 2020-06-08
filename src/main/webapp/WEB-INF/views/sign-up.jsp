@@ -84,7 +84,7 @@
 					<td>
 					<button id="su" style="float: left" type="submit" class="btn btn-light btn-lg">Sign Up</button>
 					<a href="/login"><button type="button" id="si" style="float: right;"
-					 class="btn btn-light btn-lg">Sign In</button></a>
+					 class="btn btn-dark btn-lg">Sign In</button></a>
 					
 					</td>
 					</tr>

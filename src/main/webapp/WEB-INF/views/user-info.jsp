@@ -58,7 +58,7 @@
 
 <p id="sub">
 <a href="/user/edit" id="btnedit"><button type="button" id="btnsub"
-class="btn btn-light btn-lg">Edit Info</button></a>
+class="btn btn-dark btn-lg">Edit Info</button></a>
 </p>
 
 </section>

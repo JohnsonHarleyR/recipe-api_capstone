@@ -63,7 +63,7 @@
 					<td>
 					<button id="si" type="submit" class="btn btn-light btn-lg">Sign In</button>
 					<a href="/sign-up"><button type="button" id="su" style="float: right;"
-					 class="btn btn-light btn-lg">Sign Up</button></a>
+					 class="btn btn-dark btn-lg">Sign Up</button></a>
 					
 					</td>
 					</tr>

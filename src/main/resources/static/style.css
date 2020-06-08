@@ -11189,6 +11189,9 @@ form .search {
 
 .card-header {
 	text-align: center;
+
+	background-color: #282828;
+	color: white;
 	
 }
 
@@ -11240,5 +11243,9 @@ form .search {
 }
 
 #next {
+	color: #ffffff;
+}
+
+button {
 	color: #ffffff;
 }
