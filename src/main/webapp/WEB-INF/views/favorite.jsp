@@ -48,7 +48,7 @@
 									<li>
 										<p>
 										<table>
-											<td><a href="${favorite.url}">${favorite.label}</a></td>
+											<td><a href="${favorite.url}" target="_blank">${favorite.label}</a></td>
 											<td><a class="btn-sm btn-danger"
 												href="/favorite/delete?id=${ favorite.id }">Delete!</a>
 											</td>
