@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    
+	pageEncoding="ISO-8859-1"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -17,70 +17,75 @@
 </head>
 <body>
 
-<!-- Header -->
-<section class="header">
-<%@ include file="partials/header.jsp" %>
-</section>
-
-<!-- MainBody -->
-<main class="container">
-<div id="center">
-
-<article class="card" style="width: 22rem;">
-
-<article class="card-header">
-
-<h1>Favorites</h1>
-
-
-
-</article>
-<article class="card-body" id="results">
-
-<c:choose>
-<c:when test="${listsize > 0}">
-
-
-<ol>
-<c:forEach var="favorite" items="${favorites}">
-
-
-	<li><a href="${favorite.url}">${favorite.label}</a></li>
-
-
-	<!-- Do this a different way, it is adding numbers up when it shouldn't -->
-	<section id="pages">
-	<a href="/previous">prev</a>
-	- ${page} -
-	<a href="/next">next</a>
-	<br>
-	<br>
+	<!-- Header -->
+	<section class="header">
+		<%@ include file="partials/header.jsp"%>
 	</section>
 
+	<!-- MainBody -->
+	<main class="container">
+		<div id="center">
+
+			<article class="card" style="width: 45rem;">
+
+				<article class="card-header">
+
+					<h1>Favorites</h1>
 
 
-</c:forEach>
-</ol>
 
-</c:when>
-<c:otherwise>
+				</article>
+				<article class="card-body" id="results">
+
+					<c:choose>
+						<c:when test="${listsize > 0}">
+
+
+							<ul>
+								<c:forEach var="favorite" items="${favorites}">
+
+
+									<li>
+										<p>
+										<table>
+											<td><a href="${favorite.url}">${favorite.label}</a></td>
+											<td><a class="btn-sm btn-danger"
+												href="/favorite/delete?id=${ favorite.id }">Delete!</a>
+											</td>
+										</table>
+										</p>
+									</li>
+
+
+									<!-- Do this a different way, it is adding numbers up when it shouldn't -->
+
+
+									</section>
+
+
+
+								</c:forEach>
+							</ul>
+
+						</c:when>
+						<c:otherwise>
 	
 	There are no favorites to display.
 	
 </c:otherwise>
-</c:choose>
-</article>
+					</c:choose>
+				</article>
 
 
 
 
 
-</article>
+			</article>
 
 
 
-</div>
-</main>
+		</div>
+	</main>
 
 </body>
 </html>

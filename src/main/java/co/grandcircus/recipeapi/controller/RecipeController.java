@@ -75,21 +75,30 @@ public class RecipeController {
 		//Get current user
 		User user = (User)session.getAttribute("user");
 		
-		List<Favorite> favorites = new ArrayList<>();
-		int listSize = 0;
+		checkLogin();
 		
 		if (!loggedIn) {
+			model.addAttribute("loggedin", loggedIn);
 			return "login";
 		} else {
-			//Get list of their favorite recipes
-			 favorites = favoriteRepo.findByUserId(user.getId());
+		
+			List<Favorite> favorites = new ArrayList<>();
+			int listSize = 0;
 			
-			listSize = favorites.size();
-			
-			model.addAttribute("listsize", listSize);
-			model.addAttribute("favorites", favorites);
-			model.addAttribute("loggedin", loggedIn);
-			return "favorite";
+			if (!loggedIn) {
+				return "login";
+			} else {
+				//Get list of their favorite recipes
+				 favorites = favoriteRepo.findByUserId(user.getId());
+				
+				listSize = favorites.size();
+				
+				model.addAttribute("listsize", listSize);
+				model.addAttribute("favorites", favorites);
+				model.addAttribute("loggedin", loggedIn);
+				return "favorite";
+			}
+		
 		}
 		
 		
@@ -147,6 +156,15 @@ public class RecipeController {
 			
 			return "redirect:" + url;
 		}
+	}
+	
+	// delete from favorite list
+	@RequestMapping("/favorite/delete")
+	public String deleteFavorite(@RequestParam(value="id") Long deleteMe) {
+		
+		favoriteRepo.deleteById(deleteMe);
+		
+		return "redirect:/favorite-list";
 	}
 
 //	 Next group of results
