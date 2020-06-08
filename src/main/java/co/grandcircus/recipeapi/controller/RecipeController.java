@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import co.grandcircus.recipeapi.RecipeApiService;
+import co.grandcircus.recipeapi.dao.FavoriteDao;
 import co.grandcircus.recipeapi.dao.UserDao;
+import co.grandcircus.recipeapi.model.Favorite;
 import co.grandcircus.recipeapi.model.Hits;
 import co.grandcircus.recipeapi.model.Recipe;
 import co.grandcircus.recipeapi.model.RecipeApiResponse;
@@ -31,6 +33,8 @@ public class RecipeController {
 
 	@Autowired
 	private UserDao userRepo;
+	@Autowired
+	private FavoriteDao favoriteRepo;
 
 	// This tells the navigation bar and favorites page whether a
 	// user is logged in.
@@ -62,6 +66,44 @@ public class RecipeController {
 		
 
 		return "index";
+	}
+	
+	//Favorites Page
+	@RequestMapping("/favorite-list")
+	public String favorite(Model model) {
+		
+		//Get current user
+		User user = (User)session.getAttribute("user");
+		
+		if (user == null) {
+			return "login";
+		} else {
+			//Get list of their favorite recipes
+			List<Favorite> favorite = favoriteRepo.findByUserId(user.getId());
+			
+			model.addAttribute(favorite);
+			model.addAttribute("loggedin", loggedIn);
+			return "favorite";
+		}
+		
+		
+	}
+	
+	//Add to user favorites
+	@PostMapping("/favorite/add")
+	public String addFavorite(
+			@RequestParam(value = "name") String label,
+			@RequestParam(value = "url") String url,
+			@RequestParam(value = "image-url") String imageUrl,
+			@RequestParam(value = "userid") Long userId,
+			Model model) {
+		
+		//Create new favorite
+		Favorite favorite = new Favorite(label, url, imageUrl, userId);
+		//Save to favorite
+		favoriteRepo.save(favorite);
+		
+		return "recipe";
 	}
 
 //	 Next group of results

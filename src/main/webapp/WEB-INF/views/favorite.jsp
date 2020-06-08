@@ -13,7 +13,7 @@
 <link href="/style.css" rel="stylesheet" />
 
 <meta charset="ISO-8859-1">
-<title>Favorite Recipes</title>
+<title>Search Result</title>
 </head>
 <body>
 
@@ -24,10 +24,62 @@
 
 <!-- MainBody -->
 <main class="container">
+<div id="center">
 
-<h1>Favorite Recipes</h1>
+<article class="card" style="width: 22rem;">
+
+<article class="card-header">
+
+<h1>Favorites</h1>
 
 
+
+</article>
+<article class="card-body" id="results">
+
+<c:choose>
+<c:when test="${favorites > 0}">
+
+
+<ol>
+<c:forEach var="favorite" items="${favorites}">
+
+
+	<li><a href="${favorite.url}">${favorite.label}</a></li>
+
+
+	<!-- Do this a different way, it is adding numbers up when it shouldn't -->
+	<section id="pages">
+	<a href="/previous">prev</a>
+	- ${page} -
+	<a href="/next">next</a>
+	<br>
+	<br>
+	</section>
+
+
+
+</c:forEach>
+</ol>
+
+</c:when>
+<c:otherwise>
+	
+	There are no favorites to display.
+	
+</c:otherwise>
+</c:choose>
+</article>
+
+
+
+
+
+</article>
+
+
+
+</div>
 </main>
 
 </body>
