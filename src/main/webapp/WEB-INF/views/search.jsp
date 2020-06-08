@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    
+	pageEncoding="ISO-8859-1"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -17,55 +17,70 @@
 </head>
 <body>
 
-<!-- Header -->
-<section class="header">
-<%@ include file="partials/header.jsp" %>
-</section>
+	<!-- Header -->
+	<section class="header">
+		<%@ include file="partials/header.jsp"%>
+	</section>
 
-<!-- MainBody -->
-<main class="container">
-<div id="center">
+	<!-- MainBody -->
+	<main class="container">
+		<div id="center">
 
-<article class="card" style="width: 22rem;">
+			<article class="card" style="width: 45rem;">
 
-<article class="card-header">
+				<article class="card-header">
 
-<h1>Search Results</h1>
-
-
-
-</article>
-<article class="card-body" id="results">
-<ol>
-<c:forEach var="hit" items="${searchResult.hits}">
-
-
-<li><a href="/recipe?recipe=${ hit.recipe.label }">${hit.recipe.label}</a></li>
+					<h1>Search Results</h1>
 
 
 
+				</article>
+				<article class="card-body" id="results">
+					<ul>
+						<c:forEach var="hit" items="${searchResult.hits}">
+
+
+							<li>
+								<table>
+									<tr>
+										<td>
+											<img id="imagethumb" href="/recipe?recipe=${ hit.recipe.label }" src="${ hit.recipe.image }" >
+										</td>
+										<td>
+											<h4><a href="/recipe?recipe=${ hit.recipe.label }">${hit.recipe.label}</a></h4>
+											<ul>
+												<c:forEach items="${ hit.recipe.dietLabels }" var="dietLabel">
+													<li>
+														${ dietLabel }
+													</li>
+												</c:forEach>
+											</ul>
+										</td>
+									</tr>
+								</table>
+							</li>
 
 
 
-</c:forEach>
-</ol>
-</article>
-
-<!-- Do this a different way, it is adding numbers up when it shouldn't -->
-<section id="pages">
-<a href="/previous">prev</a>
-- ${page} -
-<a href="/next">next</a>
-<br>
-<br>
-</section>
 
 
 
-</article>
+						</c:forEach>
+					</ul>
+				</article>
 
-</div>
-</main>
+				<!-- Do this a different way, it is adding numbers up when it shouldn't -->
+				<section id="pages">
+					<a href="/previous">prev</a> - ${page} - <a href="/next">next</a> <br>
+					<br>
+				</section>
+
+
+
+			</article>
+
+		</div>
+	</main>
 
 </body>
 </html>

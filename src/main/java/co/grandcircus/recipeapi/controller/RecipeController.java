@@ -252,17 +252,6 @@ public class RecipeController {
 		
 		Recipe recipe = new Recipe();
 		
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println(recipeLabel);
-		System.out.println(recipe);
-		System.out.println(response);
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		
 		for (Hits hit : hits) {
 			if (hit.getRecipe().getLabel().equals(recipeLabel)) {
 				recipe = hit.getRecipe();

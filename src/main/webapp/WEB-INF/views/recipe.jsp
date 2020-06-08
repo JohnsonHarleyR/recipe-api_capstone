@@ -23,7 +23,7 @@
 </section>
 
 <!-- MainBody -->
-<main class="container">
+<main class="container" id="searchresult">
 	<h1>
 		${ recipe.label }
 	</h1>
@@ -52,6 +52,14 @@
 			<a href="${ recipe.url }" class="btn btn-dark">Full Recipe from ${ recipe.source }</a>
 		</h2>
 	</div>
+	
+	<div>
+		<h2>
+			<a href="/favorite?name="${ recipe.label }" class="btn btn-light">Save Favorite!</a>
+		</h2>
+	</div>
+	
+	
 	
 	<div>
 		<h3>Dietary Information:</h3>
