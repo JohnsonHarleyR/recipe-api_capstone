@@ -41,7 +41,7 @@
 
 
 							<li>
-								<table>
+								<table class="results-display">
 									<tr>
 										<td>
 											<img id="imagethumb" href="/recipe?recipe=${ hit.recipe.label }" src="${ hit.recipe.image }" >
@@ -71,7 +71,15 @@
 
 				<!-- Do this a different way, it is adding numbers up when it shouldn't -->
 				<section id="pages">
-					<a href="/previous">prev</a> - ${page} - <a href="/next">next</a> <br>
+				<c:choose>
+					<c:when test="${ page == 1 }">
+					
+					</c:when>
+					<c:otherwise>
+						<a href="/previous" class="btn-sm btn-dark">prev</a>
+					</c:otherwise>
+				</c:choose>	
+					 - ${page} - <a href="/next" class="btn-sm btn-dark">next</a> <br>
 					<br>
 				</section>
 
