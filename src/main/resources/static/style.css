@@ -11087,8 +11087,36 @@ main {
 	text-align: center;
 }
 
+a {
+	color: #AA2A3A;
+}
+
+a:hover {
+	color: #c93043;
+}
+
+a:visited {
+	color: #AA2A3A;
+}
+
+a:visited:hover {
+	color: #c93043;;
+}
+
 nav {
 	background-color: #AA2A3A;
+}
+
+.navbar-custom a {
+	color: #ffffff;
+}
+
+.navbar-custom a:hover {
+	color: #D3D3D3;
+}
+
+.navbar-custom a:visited {
+	color: #ffffff;
 }
 
 form .search {
