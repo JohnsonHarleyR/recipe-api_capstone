@@ -182,24 +182,33 @@ public class RecipeController {
 		String keyword = (String) session.getAttribute("keyword");
 		String fromNum = (String) session.getAttribute("fromNum");
 		String toNum = (String) session.getAttribute("toNum");
+		String diet = (String) session.getAttribute("diet");
+		String health = (String) session.getAttribute("health");
+		String calories = (String) session.getAttribute("calories");
+		String excluded = (String) session.getAttribute("excluded");
 		
 		Integer from = Integer.parseInt(fromNum);
 		from +=10;
 		Integer to = Integer.parseInt(toNum);
 		to +=10;
-		
+		page +=1;
 
 		
 		session.setAttribute("keyword", keyword);
 		session.setAttribute("fromNum", from + "");
 		session.setAttribute("toNum", to + "");
+		session.setAttribute("diet", diet);
+		session.setAttribute("health", health);
+		session.setAttribute("calories", calories);
+		session.setAttribute("excluded", excluded);
 
-		response = service.recipeSearch(keyword, from  + "", to + "");
+		response = service.advancedRecipeSearch(keyword, fromNum + "", toNum + "", diet, health, calories, excluded);
 		
 		session.setAttribute("response", response);
 
 		model.addAttribute("searchResult", response);
 		model.addAttribute("loggedin", loggedIn);
+		model.addAttribute("page", page);
 
 		return "search";
 	}
@@ -214,6 +223,11 @@ public class RecipeController {
 		String keyword = (String) session.getAttribute("keyword");
 		String fromNum = (String) session.getAttribute("fromNum");
 		String toNum = (String) session.getAttribute("toNum");
+		String diet = (String) session.getAttribute("diet");
+		String health = (String) session.getAttribute("health");
+		String calories = (String) session.getAttribute("calories");
+		String excluded = (String) session.getAttribute("excluded");
+
 		
 		if (page == 1) {
 			return "search";
@@ -223,18 +237,25 @@ public class RecipeController {
 		from -=10;
 		Integer to = Integer.parseInt(toNum);
 		to -=10;
+		page -= 1;
 		
 		session.setAttribute("keyword", keyword);
 		session.setAttribute("fromNum", from + "");
 		session.setAttribute("toNum", to + "");
+		session.setAttribute("diet", diet);
+		session.setAttribute("health", health);
+		session.setAttribute("calories", calories);
+		session.setAttribute("excluded", excluded);
+
 		
 
-		response = service.recipeSearch(keyword, from  + "", to + "");
+		response = service.advancedRecipeSearch(keyword, fromNum + "", toNum + "", diet, health, calories, excluded);
 		
 		session.setAttribute("response", response);
 
 		model.addAttribute("searchResult", response);
 		model.addAttribute("loggedin", loggedIn);
+		model.addAttribute("page", page);
 
 		return "search";
 		
@@ -286,6 +307,15 @@ public class RecipeController {
 
 		// Get page
 		int page = (Integer) session.getAttribute("page");
+		
+		session.setAttribute("response", response);
+		session.setAttribute("keyword", keyword);
+		session.setAttribute("fromNum", fromNum);
+		session.setAttribute("toNum", toNum);
+		session.setAttribute("diet", diet);
+		session.setAttribute("health", health);
+		session.setAttribute("calories", calories);
+		session.setAttribute("excluded", excluded);
 
 		model.addAttribute("page", page); // page
 		model.addAttribute("searchResult", response);
@@ -303,7 +333,7 @@ public class RecipeController {
 		String from;
 		String to;
 		
-		
+		page = 1;
 		
 		if (keyword == null) {
 			key = (String) session.getAttribute("keyword");
