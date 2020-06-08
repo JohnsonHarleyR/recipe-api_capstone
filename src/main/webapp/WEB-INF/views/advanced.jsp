@@ -41,15 +41,11 @@
 					<input type="radio" name="diet" value="balanced"/>
 					<label>high fiber</label>
 					<input type="radio" name="diet" value="high-fiber"/>
-					<label>high protein</label>
-					<input type="radio" name="diet" value="high-protein"/>
 					<br>
 					<label>low carb</label>
 					<input type="radio" name="diet" value="low-carb"/>
 					<label>low fat</label>
 					<input type="radio" name="diet" value="low-fat"/>
-					<label>low sodium</label>
-					<input type="radio" name="diet" value="low-sodium"/>
 					<label>none</label>
 					<input type="radio" name="diet" value=""/>
 				
@@ -63,22 +59,6 @@
 					<input type="radio" name="health" value="vegetarian"/>
 					<label>vegan</label>
 					<input type="radio" name="health" value="vegan"/>
-					<label>dairy free</label>
-					<input type="radio" name="health" value="dairy-free"/>
-					<br>
-					<label>gluten free</label>
-					<input type="radio" name="health" value="gluten-free"/>
-					<label>keto friendly</label>
-					<input type="radio" name="health" value="keto-friendly"/>
-					<label>kosher</label>
-					<input type="radio" name="health" value="kosher"/>
-					<br>
-					<label>no oils added</label>
-					<input type="radio" name="health" value="no-oils-added"/>
-					<label>low sugar</label>
-					<input type="radio" name="health" value="low-sugar"/>
-					<label>paleo</label>
-					<input type="radio" name="health" value="paleo"/>
 					<br>
 					<label>none</label>
 					<input type="radio" name="health" value=""/>
@@ -86,7 +66,7 @@
 				</article>
 				
 				<article class="adv" id="calories">
-					<label><b>Calories: </b></label><br>
+					<label><b>Total Calories: </b></label><br>
 					
 					<label>Min:</label>
 					<input id="small1" type="text" name="min" value="0"/>
