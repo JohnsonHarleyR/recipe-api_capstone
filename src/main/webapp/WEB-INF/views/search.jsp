@@ -44,7 +44,7 @@
 									<img class="imagethumb" href="/recipe?recipe=${ hit.recipe.label }" src="${ hit.recipe.image }" >
 								</td>
 								<td>
-									<h4><a href="/recipe?recipe=${ hit.recipe.label }">${hit.recipe.label}</a></h4>
+									<h4><a href="/recipe?recipe=${ hit.recipe.label }" >${hit.recipe.label}</a></h4>
 										<c:forEach items="${ hit.recipe.dietLabels }" var="dietLabel">
 										
 											${ dietLabel }
