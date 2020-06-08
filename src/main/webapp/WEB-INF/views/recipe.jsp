@@ -61,7 +61,7 @@
 			<input type="hidden" name="url" value="${recipe.url}"/>
 			<input type="hidden" name="imageurl" value="${recipe.image}"/>
 			
-			<button  type="submit" url="/favorite/add" class="btn btn-light">${button}</button>
+			<button type="submit" style="border-style: solid; border-color: grey" class="btn btn-light">${button}</button>
 			
 		</h2>
 		</form>
