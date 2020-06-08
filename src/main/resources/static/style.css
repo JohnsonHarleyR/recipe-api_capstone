@@ -75,6 +75,7 @@ body {
   color: #888;
   text-align: left;
   background-color: #fff;
+  background-image: url("19dc69f2.png");
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
