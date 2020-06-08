@@ -26,7 +26,7 @@
 	<main class="container">
 		<div id="center">
 
-			<article class="card" style="width: 45rem;">
+			<article class="card" style="width: 40rem;">
 
 				<article class="card-header">
 
