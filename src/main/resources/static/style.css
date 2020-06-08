@@ -564,6 +564,18 @@ pre code {
   margin-left: auto;
 }
 
+#searchresult {
+	text-align: left;
+}
+
+#imagethumb {
+	width: 30%;
+}
+
+img:hover {
+ box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
 @media (min-width: 576px) {
   .container {
     max-width: 540px;
@@ -11147,6 +11159,7 @@ form .search {
 
 #results {
 	text-align: left;
+	
 }
 
 #i1, #i2, #i3, #i4, #i5 {
