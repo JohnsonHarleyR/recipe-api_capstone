@@ -36,37 +36,28 @@
 
 				</article>
 				<article class="card-body" id="results">
-					<ul>
-						<c:forEach var="hit" items="${searchResult.hits}">
-
-
-							<li>
-								<table class="results-display">
-									<tr>
-										<td>
-											<img id="imagethumb" href="/recipe?recipe=${ hit.recipe.label }" src="${ hit.recipe.image }" >
-										</td>
-										<td>
-											<h4><a href="/recipe?recipe=${ hit.recipe.label }">${hit.recipe.label}</a></h4>
-											<ul>
-												<c:forEach items="${ hit.recipe.dietLabels }" var="dietLabel">
-													<li>
-														${ dietLabel }
-													</li>
-												</c:forEach>
-											</ul>
-										</td>
-									</tr>
-								</table>
-							</li>
-
-
-
-
-
-
-						</c:forEach>
-					</ul>
+					<table>
+						
+							<c:forEach var="hit" items="${searchResult.hits}">
+							<tr>
+								<td>
+									<img id="imagethumb" href="/recipe?recipe=${ hit.recipe.label }" src="${ hit.recipe.image }" >
+								</td>
+								<td>
+									<h4><a href="/recipe?recipe=${ hit.recipe.label }">${hit.recipe.label}</a></h4>
+									<br>
+										<c:forEach items="${ hit.recipe.dietLabels }" var="dietLabel">
+										
+											${ dietLabel }
+											<br>
+										</c:forEach>
+										<br>
+									</td>
+																	
+							</tr>
+							</c:forEach>
+						
+					</table>	
 				</article>
 
 				<!-- Do this a different way, it is adding numbers up when it shouldn't -->
