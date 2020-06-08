@@ -11087,6 +11087,10 @@ main {
 	text-align: center;
 }
 
+/* button {
+	border: 2px solid black;
+}*/
+
 a {
 	color: #AA2A3A;
 }
@@ -11176,6 +11180,8 @@ form .search {
 
 .card-header {
 	text-align: center;
+	background-color: grey;
+	color: #ffffff;
 }
 
 .card-body {

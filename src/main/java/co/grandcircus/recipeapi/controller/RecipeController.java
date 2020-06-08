@@ -39,6 +39,7 @@ public class RecipeController {
 	// This tells the navigation bar and favorites page whether a
 	// user is logged in.
 	private boolean loggedIn = false;
+	private int page = 1;;
 	private String loginMessage = "Please enter your username and password.";
 	private String signUpMessage = "Please enter the following information.";
 	private String infoMessage = "Here is your user information.";
@@ -173,7 +174,10 @@ public class RecipeController {
 
 		// next page
 		// somehow determine if you're on last page, then disallow next page
-
+		if (!response.isMore()) {
+			return "search";
+		}
+		
 
 		String keyword = (String) session.getAttribute("keyword");
 		String fromNum = (String) session.getAttribute("fromNum");
@@ -183,6 +187,8 @@ public class RecipeController {
 		from +=10;
 		Integer to = Integer.parseInt(toNum);
 		to +=10;
+		
+
 		
 		session.setAttribute("keyword", keyword);
 		session.setAttribute("fromNum", from + "");
@@ -201,18 +207,17 @@ public class RecipeController {
 //	 Previous group of results
 	@RequestMapping("/previous")
 	public String previousResults(Model model) {
-
-//		// previous page
-//		int page = (Integer) session.getAttribute("page");
-//		if (page != 0) {
-//			page -= 1;
-//		}
+		
 //
 //		session.setAttribute("page", page);
 		
 		String keyword = (String) session.getAttribute("keyword");
 		String fromNum = (String) session.getAttribute("fromNum");
 		String toNum = (String) session.getAttribute("toNum");
+		
+		if (page == 1) {
+			return "search";
+		}
 		
 		Integer from = Integer.parseInt(fromNum);
 		from -=10;
@@ -222,6 +227,7 @@ public class RecipeController {
 		session.setAttribute("keyword", keyword);
 		session.setAttribute("fromNum", from + "");
 		session.setAttribute("toNum", to + "");
+		
 
 		response = service.recipeSearch(keyword, from  + "", to + "");
 		
@@ -296,6 +302,8 @@ public class RecipeController {
 		String key;
 		String from;
 		String to;
+		
+		
 		
 		if (keyword == null) {
 			key = (String) session.getAttribute("keyword");
