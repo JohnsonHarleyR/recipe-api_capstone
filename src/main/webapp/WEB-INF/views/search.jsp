@@ -41,16 +41,16 @@
 							<c:forEach var="hit" items="${searchResult.hits}">
 							<tr>
 								<td>
-									<img id="imagethumb" href="/recipe?recipe=${ hit.recipe.label }" src="${ hit.recipe.image }" >
+									<img class="imagethumb" href="/recipe?recipe=${ hit.recipe.label }" src="${ hit.recipe.image }" >
 								</td>
 								<td>
 									<h4><a href="/recipe?recipe=${ hit.recipe.label }">${hit.recipe.label}</a></h4>
-									<br>
 										<c:forEach items="${ hit.recipe.dietLabels }" var="dietLabel">
 										
 											${ dietLabel }
-											<br>
+											
 										</c:forEach>
+										<br>
 										<br>
 									</td>
 																	
@@ -67,10 +67,10 @@
 					
 					</c:when>
 					<c:otherwise>
-						<a href="/previous" class="btn-sm btn-dark">prev</a>
+						<a href="/previous" id="prev" class="btn-sm btn-dark">prev</a>
 					</c:otherwise>
 				</c:choose>	
-					 - ${page} - <a href="/next" class="btn-sm btn-dark">next</a> <br>
+					 - ${page} - <a href="/next" id="next" class="btn-sm btn-dark">next</a> <br>
 					<br>
 				</section>
 
