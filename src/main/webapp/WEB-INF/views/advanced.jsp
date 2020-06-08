@@ -60,7 +60,6 @@
 					<input type="radio" name="health" value="vegetarian"/>
 					<label>vegan</label>
 					<input type="radio" name="health" value="vegan"/>
-					<br>
 					<label>none</label>
 					<input type="radio" name="health" value=""/>
 				
