@@ -100,44 +100,53 @@ public class RecipeController {
 	public String addFavorite(
 			@RequestParam(value = "name") String label,
 			@RequestParam(value = "imageurl") String imageUrl,
+			@RequestParam(value = "url") String recipeUrl,
 			Model model) {
 		
 		boolean exists = false;
 		
-		//Get user
-		User user = (User)session.getAttribute("user");
+		checkLogin();
 		
-		//Get list of their favorite recipes
-		List<Favorite> favorites = favoriteRepo.findByUserId(user.getId());
+		if (!loggedIn) {
+			model.addAttribute("loggedin", loggedIn);
+			return "login";
+		} else {
 		
-		/*
-		//See if favorite already exists
-		exists = doesFavoriteExist(favorites, label);
-		*/
-		
-		//Create url string
-		String url = "/recipe?recipe=" + label;
-		
-		//Loop through favorites to see if it exists already
-		
-		
-		
-		//Create new favorite - if it doesn't exist
-		if (!exists) {
-			Favorite favorite = new Favorite(label, url, imageUrl, user.getId());
-			//Save to favorite
-			favoriteRepo.save(favorite);
+			//Get user
+			User user = (User)session.getAttribute("user");
+			
+			//Get list of their favorite recipes
+			List<Favorite> favorites = favoriteRepo.findByUserId(user.getId());
+			
+			/*
+			//See if favorite already exists
+			exists = doesFavoriteExist(favorites, label);
+			*/
+			
+			//Create url string
+			String url = "/recipe?recipe=" + label;
+			
+			//Loop through favorites to see if it exists already
+			
+			
+			
+			//Create new favorite - if it doesn't exist
+			if (!exists) {
+				Favorite favorite = new Favorite(label, recipeUrl, imageUrl, user.getId());
+				//Save to favorite
+				favoriteRepo.save(favorite);
+			}
+			
+			System.out.println(url);
+			System.out.println(label);
+			
+			/*
+			//Set button message
+			model.addAttribute("button", "Saved");
+			*/
+			
+			return "redirect:" + url;
 		}
-		
-		System.out.println(url);
-		System.out.println(label);
-		
-		/*
-		//Set button message
-		model.addAttribute("button", "Saved");
-		*/
-		
-		return "redirect:" + url;
 	}
 
 //	 Next group of results
@@ -322,22 +331,29 @@ public class RecipeController {
 
 		System.out.println(recipeLabel);
 		
-		//For seeing if recipe has been favorited already
-		boolean exists = false;
-		User user = (User)session.getAttribute("user");
-		List<Favorite> favorites = favoriteRepo.findByUserId(user.getId());
-		String buttonMessage;
-		
-		//Determine if favorite exists
-		exists = doesFavoriteExist(favorites, recipeLabel);
-		
 		checkLogin();
 		
-		//Set favorite button message
-		if (exists) {
-			buttonMessage = "Saved";
-		} else {
-			buttonMessage = "Save Favorite!";
+		//For seeing if recipe has been favorited already
+		boolean exists = false;
+		
+		String buttonMessage = "Save Favorite!";
+		
+		if (loggedIn) {
+		
+			User user = (User)session.getAttribute("user");
+			List<Favorite> favorites = favoriteRepo.findByUserId(user.getId());
+			
+					
+			//Determine if favorite exists
+			exists = doesFavoriteExist(favorites, recipeLabel);
+					
+			//Set favorite button message
+			if (exists) {
+				buttonMessage = "Saved";
+			} else {
+				buttonMessage = "Save Favorite!";
+			}
+		
 		}
 		
 		//RecipeApiResponse response = (RecipeApiResponse) session.getAttribute("response");
@@ -398,7 +414,7 @@ public class RecipeController {
 		
 		// If user is not logged in, redirect to login page
 		if (!loggedIn) {
-			model.addAttribute("loggedin", login);
+			model.addAttribute("loggedin", loggedIn);
 			return "redirect:/login";
 		} else {
 			model.addAttribute("user", user);
